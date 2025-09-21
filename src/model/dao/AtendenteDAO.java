@@ -56,6 +56,10 @@ public class AtendenteDAO {
                 atendentes.add(new Atendente(id_atendente, nome_atendente, email_atendente));
             }
 
+            ps.close();
+            rs.close();
+            conn.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

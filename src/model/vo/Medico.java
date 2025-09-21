@@ -18,6 +18,11 @@ public class Medico {
         this.nome = nome;
     }
 
+    // apenas o id
+    public Medico(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

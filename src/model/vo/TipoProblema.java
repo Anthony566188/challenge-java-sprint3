@@ -1,23 +1,18 @@
 package model.vo;
 
-public class Especialidade {
+public class TipoProblema {
 
     private int id;
     private String nome;
 
-    public Especialidade(int id, String nome) {
+    public TipoProblema(int id, String nome) {
         this.id = id;
         this.nome = nome;
     }
 
     // Construtor sem id
-    public Especialidade(String nome) {
+    public TipoProblema(String nome) {
         this.nome = nome;
-    }
-
-    // Construtor apenas com o id
-    public Especialidade(int id) {
-        this.id = id;
     }
 
     public int getId() {

@@ -79,7 +79,7 @@ public class PacienteDAO {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ps.execute();
-            System.out.println("Paciente excluido com sucesso!");
+            System.out.println("Paciente excluído com sucesso!");
         } catch (SQLException e) {
             System.err.println("Erro ao excluir o Paciente!");
             e.printStackTrace();

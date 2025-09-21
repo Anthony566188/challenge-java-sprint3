@@ -3,6 +3,8 @@ package controller;
 import model.dao.MedicoDAO;
 import model.vo.Medico;
 
+import java.util.List;
+
 public class MedicoController {
 
     private MedicoDAO medicoDAO;
@@ -11,7 +13,12 @@ public class MedicoController {
         medicoDAO = new MedicoDAO();
     }
 
-    public void inserirMedico(Medico medico){
+    public void inserir(Medico medico){
         medicoDAO.inserirMedico(medico);
     }
+
+    public List<Medico> listar(){
+        return medicoDAO.listarMedicos();
+    }
+
 }

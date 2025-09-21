@@ -39,7 +39,7 @@ public class LoginAtendenteDAO {
             conn.close();
 
         } catch (Exception e) {
-            System.err.println("Erro ao inserir LoginPaciente: " + e.getMessage());
+            System.err.println("Erro ao inserir o Login do Atendente: " + e.getMessage());
         }
     }
 

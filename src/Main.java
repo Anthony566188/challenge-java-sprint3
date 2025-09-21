@@ -1,7 +1,4 @@
-import model.vo.Atendente;
-import model.vo.Especialidade;
-import model.vo.Medico;
-import model.vo.Paciente;
+import model.vo.*;
 import view.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -15,6 +12,11 @@ public class Main {
         LoginAtendenteView loginAtendenteView = new LoginAtendenteView();
         EspecialidadeView especialidadeView = new EspecialidadeView();
         MedicoView medicoView = new MedicoView();
+        MedicoLoginView medicoLoginView = new MedicoLoginView();
+        LoginManagerView loginManagerView = new LoginManagerView();
+        TipoProblemaView tipoProblemaView = new TipoProblemaView();
+        ConsultaView consultaView = new ConsultaView();
+        TicketView ticketView = new TicketView();
 
         //pacienteView.inserirPaciente(new Paciente("123.456.789-00", "Anthony", "123456", "01/07/06", "Passagem1234"));
 
@@ -22,8 +24,6 @@ public class Main {
 
 
         //loginPacienteView.inserirLoginPaciente();
-
-        //loginPacienteView.autenticarPaciente();
 
 
 
@@ -34,8 +34,6 @@ public class Main {
 
 
         //loginAtendenteView.inserirLoginAtendente();
-
-        //loginAtendenteView.autenticarAtendente();
 
 
 
@@ -48,6 +46,36 @@ public class Main {
 
 
         //medicoView.inserirMedico();
+
+        //medicoView.listarMedicos();
+
+
+        //medicoLoginView.inserirMedicoLogin();
+
+
+
+
+//        tipoProblemaView.inserirTipoProblema(new TipoProblema("Problema 1"));
+//        tipoProblemaView.inserirTipoProblema(new TipoProblema("Problema 2"));
+//        tipoProblemaView.inserirTipoProblema(new TipoProblema("Problema 3"));
+
+
+
+
+        //consultaView.inserirConsulta();
+
+        //consultaView.listarConsultas();
+
+
+
+
+        //ticketView.criarTicket();
+
+
+
+
+
+        loginManagerView.autenticarUsuario();
 
     }
 }
