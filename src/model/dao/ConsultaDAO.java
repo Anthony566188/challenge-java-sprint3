@@ -40,38 +40,38 @@ public class ConsultaDAO {
         }
     }
 
-    public List<Consulta> listarConsultas(){
-        //criar a lista de Consultas
-        List<Consulta> consultas = new ArrayList<Consulta>();
-
-        //configurar a query
+    public List<Consulta> listarConsultas() {
+        List<Consulta> consultas = new ArrayList<>();
         String sql = "SELECT * FROM TB_CONSULTA";
 
-        try {
-            Connection conn = ConnectionManager.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
 
-            //preparar o objeto para receber os dados do Oracle
-            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Consulta consulta = new Consulta();
+                consulta.setId(rs.getInt("id_consulta"));
+                consulta.setDataEHoraInicio(rs.getTimestamp("data_e_hora_inicio").toLocalDateTime());
+                consulta.setDataEHoraFim(rs.getTimestamp("data_e_hora_fim").toLocalDateTime());
 
-            // percorrer o ResultSet
-            while(rs.next()) {
-                int id_consulta = rs.getInt(1);
-                int id_paciente = rs.getInt(2);
-                int id_medico = rs.getInt(3);
-                LocalDateTime data_e_hora_inicio = rs.getTimestamp(4).toLocalDateTime();
-                LocalDateTime data_e_hora_fim = rs.getTimestamp(5).toLocalDateTime();
+                // Paciente associado
+                Paciente paciente = new Paciente();
+                paciente.setId(rs.getInt("id_paciente"));
+                consulta.setPaciente(paciente);
 
-                Paciente paciente = new Paciente(id_paciente);
-                Medico medico = new Medico(id_medico);
+                // Médico associado
+                Medico medico = new Medico();
+                medico.setId(rs.getInt("id_medico"));
+                consulta.setMedico(medico);
 
-                consultas.add(new Consulta(id_consulta, paciente, medico, data_e_hora_inicio, data_e_hora_fim));
+                consultas.add(consulta);
             }
-
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return consultas;
     }
+
+
 
 }

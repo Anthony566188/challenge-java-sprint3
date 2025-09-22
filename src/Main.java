@@ -71,11 +71,14 @@ public class Main {
 
         //ticketView.criarTicket();
 
+        //ticketView.listarTickets();
+
 
 
 
 
         loginManagerView.autenticarUsuario();
+        //ticketView.listarTickets();
 
     }
 }

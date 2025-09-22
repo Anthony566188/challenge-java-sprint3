@@ -3,6 +3,8 @@ package controller;
 import model.dao.TicketDAO;
 import model.vo.Ticket;
 
+import java.util.List;
+
 public class TicketController {
 
     private TicketDAO ticketDAO;
@@ -13,5 +15,9 @@ public class TicketController {
 
     public void inserir(Ticket ticket){
         ticketDAO.inserirTicket(ticket);
+    }
+
+    public List<Ticket> listar(){
+        return ticketDAO.listarTickets();
     }
 }

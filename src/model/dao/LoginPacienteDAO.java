@@ -41,7 +41,7 @@ public class LoginPacienteDAO {
         }
     }
 
-    public boolean autenticarPaciente(){
+    public Paciente autenticarPaciente(){
 
         String sql = "SELECT * FROM TB_LOGIN_PACIENTE WHERE senha = ? AND login = ?";
 
@@ -62,22 +62,25 @@ public class LoginPacienteDAO {
 
             if (rs.next()) {
                 System.out.println("Login realizado com sucesso!");
-//                int idPaciente = rs.getInt("id_paciente");
-//                System.out.println("ID do paciente autenticado: " + idPaciente);
+                int idPaciente = rs.getInt("id_paciente");
+
+                Paciente pacienteAutenticado = new Paciente();
+                pacienteAutenticado.setId(idPaciente);
+
                 rs.close();
                 ps.close();
                 conn.close();
-                return true;
+                return pacienteAutenticado;
             } else {
                 System.out.println("Login ou senha inválidos!");
-                return false; // Retorna false em caso de falha
+                return null;
             }
 
 
 
         } catch (Exception e) {
             System.err.println("Erro ao autenticar: " + e.getMessage());
-            return false;
+            return null;
         }
     }
 

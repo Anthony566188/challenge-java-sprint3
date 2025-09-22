@@ -37,4 +37,15 @@ public class TicketView {
         controller.inserir(new Ticket(pacienteSelecionado, tipoProblemaSelecionado, consultaSelecionada));
     }
 
+    public void listarTickets(){
+        System.out.println("Listando Tickets...");
+        for (Ticket ticket : controller.listar()) {
+            System.out.println("-----------------------------------------------------");
+            System.out.println("ID do Ticket: " + ticket.getId());
+            System.out.println("ID do Paciente: " + ticket.getPaciente().getId());
+            System.out.println("ID do Tipo de Problema: " + ticket.getTipoProblema().getId());
+            System.out.println("ID da Consulta: " + ticket.getConsulta().getId());
+        }
+    }
+
 }

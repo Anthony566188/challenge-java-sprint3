@@ -3,10 +3,10 @@ package model.dao;
 import model.vo.*;
 import util.ConnectionManager;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TicketDAO {
 
@@ -36,4 +36,39 @@ public class TicketDAO {
             System.err.println("Erro ao criar Ticket: " + e.getMessage());
         }
     }
+
+    public List<Ticket> listarTickets(){
+        //criar a lista de Tickets
+        List<Ticket> tickets = new ArrayList<Ticket>();
+
+        //configurar a query
+        String sql = "SELECT * FROM TB_TICKET";
+
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            //preparar o objeto para receber os dados do Oracle
+            ResultSet rs = ps.executeQuery();
+
+            // percorrer o ResultSet
+            while(rs.next()) {
+                int id_ticket = rs.getInt(1);
+                int id_paciente = rs.getInt(2);
+                int id_tipo_problema = rs.getInt(3);
+                int id_consulta = rs.getInt(4);
+
+                Paciente paciente = new Paciente(id_paciente);
+                TipoProblema tipoProblema = new TipoProblema(id_tipo_problema);
+                Consulta consulta = new Consulta(id_consulta);
+
+                tickets.add(new Ticket(id_ticket, paciente, tipoProblema, consulta));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tickets;
+    }
+
 }

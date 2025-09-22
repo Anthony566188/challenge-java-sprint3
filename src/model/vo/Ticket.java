@@ -14,6 +14,7 @@ public class Ticket {
         this.consulta = consulta;
     }
 
+    // Construtor sem id
     public Ticket(Paciente paciente, TipoProblema tipoProblema, Consulta consulta) {
         this.paciente = paciente;
         this.tipoProblema = tipoProblema;

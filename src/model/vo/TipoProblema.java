@@ -15,6 +15,11 @@ public class TipoProblema {
         this.nome = nome;
     }
 
+    // apenas com id
+    public TipoProblema(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

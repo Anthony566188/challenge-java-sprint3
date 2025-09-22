@@ -33,6 +33,10 @@ public class Paciente {
         this.id = id;
     }
 
+    public Paciente(){
+
+    }
+
     public int getId() {
         return id;
     }

@@ -23,6 +23,10 @@ public class Medico {
         this.id = id;
     }
 
+    public  Medico() {
+
+    }
+
     public int getId() {
         return id;
     }

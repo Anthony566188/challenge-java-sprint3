@@ -26,6 +26,15 @@ public class Consulta {
         this.dataEHoraFim = dataEHoraFim;
     }
 
+    // apenas com id
+    public Consulta(int id){
+        this.id = id;
+    }
+
+    public  Consulta(){
+
+    }
+
     public int getId() {
         return id;
     }

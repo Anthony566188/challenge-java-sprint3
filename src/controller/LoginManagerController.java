@@ -1,9 +1,13 @@
 package controller;
 
+import model.dao.ConsultaDAO;
 import model.dao.LoginAtendenteDAO;
 import model.dao.LoginPacienteDAO;
 import model.dao.MedicoLoginDAO;
+import model.vo.Consulta;
+import model.vo.Paciente;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class LoginManagerController {
@@ -12,12 +16,14 @@ public class LoginManagerController {
     private LoginPacienteDAO loginPacienteDAO;
     private LoginAtendenteDAO loginAtendenteDAO;
     private PacienteController pacienteController;
+    private ConsultaDAO consultaDAO;
 
     public LoginManagerController() {
         medicoLoginDAO = new MedicoLoginDAO();
         loginPacienteDAO = new LoginPacienteDAO();
         loginAtendenteDAO = new LoginAtendenteDAO();
         pacienteController = new PacienteController();
+        consultaDAO = new ConsultaDAO();
     }
 
     public void autenticar() {
@@ -37,11 +43,20 @@ public class LoginManagerController {
                 medicoLoginDAO.autenticarMedico();
                 break;
             case 2:
-                if (loginPacienteDAO.autenticarPaciente() == true) {
-                    // Se a autenticação for bem-sucedida, exibe o novo menu.
-                    pacienteController.exibirMenuPaciente();
-                    break;
+                Paciente pacienteAutenticado = loginPacienteDAO.autenticarPaciente();
+                if (pacienteAutenticado != null) {
+                    List<Consulta> consultaAutenticado = consultaDAO.listarConsultas();
+
+                    for (Consulta c : consultaAutenticado) {
+                        if (c.getPaciente().getId() == pacienteAutenticado.getId()) {
+                            // aqui você pode passar a consulta como parâmetro
+                            pacienteController.exibirMenuPaciente(pacienteAutenticado, c);
+                            // ou se quiser passar a consulta direto:
+                            // pacienteController.exibirMenuConsulta(c);
+                        }
+                    }
                 }
+                break;
 
             case 3:
                 loginAtendenteDAO.autenticarAtendente();
