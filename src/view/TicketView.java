@@ -25,18 +25,6 @@ public class TicketView {
         consultaController = new ConsultaController();
     }
 
-    public void criarTicket(){
-        List<Paciente> pacientes = pacienteController.listar();
-        List<TipoProblema> tiposProblemas = tipoProblemaController.listar();
-        List<Consulta> consultas = consultaController.listar();
-
-        Paciente pacienteSelecionado = pacientes.get(0);
-        TipoProblema tipoProblemaSelecionado = tiposProblemas.get(0);
-        Consulta consultaSelecionada = consultas.get(0);
-
-        controller.inserir(new Ticket(pacienteSelecionado, tipoProblemaSelecionado, consultaSelecionada));
-    }
-
     public void listarTickets(){
         System.out.println("Listando Tickets...");
         for (Ticket ticket : controller.listar()) {

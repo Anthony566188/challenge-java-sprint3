@@ -71,4 +71,49 @@ public class TicketDAO {
         return tickets;
     }
 
+    // Listar apenas os tickets associado a um paciente
+    public List<Ticket> listarTicketsPorPaciente(int idPaciente) {
+        List<Ticket> tickets = new ArrayList<>();
+        String sql = "SELECT * FROM TB_TICKET WHERE id_paciente = ?";
+
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idPaciente);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id_ticket = rs.getInt("id_ticket");
+                int id_tipo_problema = rs.getInt("id_tipo_problema");
+                int id_consulta = rs.getInt("id_consulta");
+
+                Paciente paciente = new Paciente(idPaciente);
+                TipoProblema tipoProblema = new TipoProblema(id_tipo_problema);
+                Consulta consulta = new Consulta(id_consulta);
+
+                tickets.add(new Ticket(id_ticket, paciente, tipoProblema, consulta));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tickets;
+    }
+
+
+    public void excluirTicket(int id){
+        String sql = "DELETE FROM TB_TICKET WHERE ID_TICKET = ?";
+
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            System.out.println("Ticket excluído com sucesso!");
+        } catch (SQLException e) {
+            System.err.println("Erro ao excluir Ticket!");
+            e.printStackTrace();
+        }
+    }
+
 }

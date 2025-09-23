@@ -16,8 +16,9 @@ public class LoginPacienteController {
         loginPacienteDAO.inserirLoginPaciente(loginPaciente);
     }
 
-    public void autenticar() {
-        loginPacienteDAO.autenticarPaciente();
+    public Paciente autenticar() {
+
+        return loginPacienteDAO.autenticarPaciente();
     }
 
 }

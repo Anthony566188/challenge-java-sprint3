@@ -1,16 +1,75 @@
 package view;
 
-import controller.LoginManagerController;
+import controller.*;
+import model.vo.Atendente;
+import model.vo.Consulta;
+import model.vo.Paciente;
+
+import java.util.List;
+import java.util.Scanner;
 
 public class LoginManagerView {
 
-    private LoginManagerController controller;
+    private MedicoLoginController medicoLoginController;
+    private LoginPacienteController loginPacienteController;
+    private ConsultaController consultaController;
+    private LoginAtendenteController loginAtendenteController;
+    private PacienteView pacienteView;
+    private AtendenteView atendenteView;
 
     public LoginManagerView(){
-        controller = new LoginManagerController();
+        medicoLoginController = new MedicoLoginController();
+        loginPacienteController = new LoginPacienteController();
+        consultaController = new ConsultaController();
+        loginAtendenteController = new LoginAtendenteController();
+        pacienteView = new PacienteView();
+        atendenteView = new AtendenteView();
     }
 
     public void autenticarUsuario() {
-        controller.autenticar();
+        Scanner sc = new Scanner(System.in);
+        int opcao;
+
+        System.out.println("Selecione o tipo de usuário para autenticar:");
+        System.out.println("1 - Médico");
+        System.out.println("2 - Paciente");
+        System.out.println("3 - Atendente");
+        System.out.println("0 - Sair");
+        System.out.print("Sua opção: ");
+        opcao = sc.nextInt();
+
+        switch (opcao) {
+            case 1:
+                medicoLoginController.autenticar();
+                break;
+            case 2:
+                Paciente pacienteAutenticado = loginPacienteController.autenticar();
+                if (pacienteAutenticado != null) {
+                    List<Consulta> consultaAutenticado = consultaController.listar();
+
+                    for (Consulta c : consultaAutenticado) {
+                        if (c.getPaciente().getId() == pacienteAutenticado.getId()) {
+                            // aqui é passado o paciente autenticado e a consulta deste paciente como parâmetro
+                            pacienteView.exibirMenuPaciente(pacienteAutenticado, c);
+                        }
+                    }
+                }
+                break;
+
+            case 3:
+                Atendente atendenteAutenticado = loginAtendenteController.autenticar();
+                if (atendenteAutenticado != null) {
+                    atendenteView.exibirMenuAtendente();
+                }
+                break;
+            case 0:
+                System.out.println("Saindo...");
+                break;
+            default:
+                System.out.println("Opção inválida. Por favor, tente novamente.");
+                break;
+        }
+        sc.close();
     }
+
 }

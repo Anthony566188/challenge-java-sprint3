@@ -1,6 +1,7 @@
 package controller;
 
 import model.dao.LoginAtendenteDAO;
+import model.vo.Atendente;
 import model.vo.LoginAtendente;
 
 public class LoginAtendenteController {
@@ -15,7 +16,7 @@ public class LoginAtendenteController {
         loginAtendenteDAO.inserirLoginAtendente(loginAtendente);
     }
 
-    public void autenticar(){
-        loginAtendenteDAO.autenticarAtendente();
+    public Atendente autenticar(){
+        return loginAtendenteDAO.autenticarAtendente();
     }
 }

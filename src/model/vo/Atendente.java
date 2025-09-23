@@ -20,6 +20,11 @@ public class Atendente {
         this.email = email;
     }
 
+
+    public Atendente() {
+
+    }
+
     public int getId() {
         return id;
     }

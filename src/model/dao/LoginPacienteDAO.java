@@ -47,9 +47,9 @@ public class LoginPacienteDAO {
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Login: ");
+        System.out.print("Login: ");
         String login = sc.nextLine();
-        System.out.println("Senha: ");
+        System.out.print("Senha: ");
         String senha = sc.nextLine();
 
         try {

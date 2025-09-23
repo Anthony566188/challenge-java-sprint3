@@ -43,7 +43,7 @@ public class LoginAtendenteDAO {
         }
     }
 
-    public void autenticarAtendente(){
+    public Atendente autenticarAtendente(){
 
         String sql = "SELECT * FROM TB_LOGIN_ATENDENTE WHERE senha = ? AND login = ?";
 
@@ -64,19 +64,22 @@ public class LoginAtendenteDAO {
 
             if (rs.next()) {
                 System.out.println("Login realizado com sucesso!");
-//                int idAtendente = rs.getInt("id_atendente");
-//                System.out.println("ID do Atendente autenticado: " + idAtendente);
+                int idAtendente = rs.getInt("id_atendente");
+
+                Atendente atendenteAutenticado = new Atendente();
+                atendenteAutenticado.setId(idAtendente);
+                rs.close();
+                ps.close();
+                conn.close();
+                return atendenteAutenticado;
             } else {
                 System.out.println("Login ou senha inválidos!");
+                return null;
             }
-
-            rs.close();
-            ps.close();
-            conn.close();
 
         } catch (Exception e) {
             System.err.println("Erro ao autenticar: " + e.getMessage());
-
+            return null;
         }
     }
 

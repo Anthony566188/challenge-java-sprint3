@@ -35,32 +35,4 @@ public class PacienteController {
         pacienteDAO.excluirPaciente(id);
     }
 
-    public void exibirMenuPaciente(Paciente paciente, Consulta consulta){
-        Scanner sc = new Scanner(System.in);
-        int opcao;
-
-        System.out.println("--- Menu do Paciente ---");
-        System.out.println("1 - Criar Ticket");
-        System.out.println("0 - Sair");
-        System.out.print("Sua opção: ");
-        opcao = sc.nextInt();
-
-        switch (opcao) {
-            case 1:
-                TipoProblema tipoEscolhido = tipoProblemaView.listarTiposProblemas();
-
-
-                if (tipoEscolhido != null) {
-                    ticketDAO.inserirTicket(new Ticket(paciente, tipoEscolhido, consulta));
-                }
-                break;
-            case 0:
-                System.out.println("Saindo do menu do paciente...");
-                break;
-            default:
-                System.out.println("Opção inválida. Por favor, tente novamente.");
-                break;
-        }
-    }
-
 }
