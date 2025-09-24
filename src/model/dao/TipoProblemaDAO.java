@@ -60,4 +60,19 @@ public class TipoProblemaDAO {
         return tiposProblemas;
     }
 
+    public void excluirTipoProblema(int id){
+        String sql = "DELETE FROM TB_TIPO_PROBLEMA WHERE ID_TIPO_PROBLEMA = ?";
+
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            System.out.println("Tipo de problema excluído com sucesso!");
+        } catch (SQLException e) {
+            System.err.println("Erro ao excluir Tipo de problema!");
+            e.printStackTrace();
+        }
+    }
+
 }

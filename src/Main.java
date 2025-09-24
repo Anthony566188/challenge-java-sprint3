@@ -18,67 +18,13 @@ public class Main {
         ConsultaView consultaView = new ConsultaView();
         TicketView ticketView = new TicketView();
 
-        //pacienteView.inserirPaciente(new Paciente("123.456.789-00", "Anthony", "123456", "01/07/06", "Passagem1234"));
-
-        //pacienteView.listarPaciente();
-
-
-        //loginPacienteView.inserirLoginPaciente();
 
 
 
 
-        //atendenteView.inserirAtendente(new Atendente("Romário", "romario123@gmail.com"));
-
-        //atendenteView.listarAtendentes();
-
-
-        //loginAtendenteView.inserirLoginAtendente();
-
-
-
-
-        //especialidadeView.inserirEspecialidade(new Especialidade("Cardiologista"));
-
-        //especialidadeView.listarEspecialidades();
-
-
-
-
-        //medicoView.inserirMedico();
-
-        //medicoView.listarMedicos();
-
-
-        //medicoLoginView.inserirMedicoLogin();
-
-
-
-
-//        tipoProblemaView.inserirTipoProblema(new TipoProblema("Problema 1"));
-//        tipoProblemaView.inserirTipoProblema(new TipoProblema("Problema 2"));
-//        tipoProblemaView.inserirTipoProblema(new TipoProblema("Problema 3"));
-
-
-
-
-        //consultaView.inserirConsulta();
-
-        //consultaView.listarConsultas();
-
-
-
-
-        //ticketView.criarTicket();
-
-        //ticketView.listarTickets();
-
-
-
-
-
+        
         loginManagerView.autenticarUsuario();
-        //ticketView.listarTickets();
+
 
     }
 }

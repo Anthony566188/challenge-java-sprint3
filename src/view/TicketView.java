@@ -36,4 +36,8 @@ public class TicketView {
         }
     }
 
+    public void excluirTicket(int id){
+        controller.excluir(id);
+    }
+
 }

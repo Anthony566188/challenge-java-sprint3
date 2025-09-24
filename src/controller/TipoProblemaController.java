@@ -20,4 +20,9 @@ public class TipoProblemaController {
     public List<TipoProblema> listar() {
         return tipoProblemaDAO.listarTiposProblemas();
     }
+
+    public void excluir(int id) {
+        tipoProblemaDAO.excluirTipoProblema(id);
+    }
+
 }

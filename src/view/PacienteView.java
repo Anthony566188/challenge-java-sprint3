@@ -42,86 +42,89 @@ public class PacienteView {
         controller.excluir(id);
     }
 
-    public void exibirMenuPaciente(Paciente paciente, Consulta consulta){
+    public void exibirMenuPaciente(Paciente paciente, Consulta consulta) {
         Scanner sc = new Scanner(System.in);
         int opcao;
 
-        System.out.println("--- Menu do Paciente ---");
-        System.out.println("1 - Criar Ticket");
-        System.out.println("2 - Excluir Ticket");
-        System.out.println("3 - Ver meus Tickets");
-        System.out.println("4 - Atualizar Ticket");
-        System.out.println("0 - Sair");
-        System.out.print("Sua opção: ");
-        opcao = sc.nextInt();
+        do {
+            System.out.println("--- Menu do Paciente ---");
+            System.out.println("1 - Criar Ticket");
+            System.out.println("2 - Excluir Ticket");
+            System.out.println("3 - Ver meus Tickets");
+            System.out.println("4 - Atualizar Ticket");
+            System.out.println("0 - Sair");
+            System.out.print("Sua opção: ");
+            opcao = sc.nextInt();
 
-        List<Ticket> tickets = ticketController.listarTicketsPorPaciente(paciente.getId());
-        switch (opcao) {
-            case 1:
-                TipoProblema tipoEscolhido = tipoProblemaView.listarTiposProblemas();
-
-
-                if (tipoEscolhido != null) {
-                    ticketController.inserir(new Ticket(paciente, tipoEscolhido, consulta));
-                }
-                break;
-            case 2:
-                /*
-                 * Aqui chama o método listarTicketsPorPaciente() e passa como parâmetro o id do paciente que
-                 * foi passado como parâmetro no método exibirMenuPaciente()
-                 * */
-
-
-                if (tickets.isEmpty()) {
-                    System.out.println("Nenhum ticket encontrado!.");
-                } else {
-                    System.out.println("Tickets disponíveis:");
-                    for (int i = 0; i < tickets.size(); i++) {
-                        System.out.println((i + 1) + " - Ticket ID: " + tickets.get(i).getId());
+            switch (opcao) {
+                case 1:
+                    TipoProblema tipoEscolhido = tipoProblemaView.listarTiposProblemas();
+                    if (tipoEscolhido != null) {
+                        ticketController.inserir(new Ticket(paciente, tipoEscolhido, consulta));
                     }
+                    break;
 
-                    System.out.print("Selecione o número do Ticket que deseja excluir: ");
-                    int opcaoExcluir = sc.nextInt();
-
-                    if (opcaoExcluir > 0 && opcaoExcluir <= tickets.size()) {
-                        Ticket ticketSelecionado = tickets.get(opcaoExcluir - 1);
-                        ticketController.excluir(ticketSelecionado.getId());
+                case 2: {
+                    List<Ticket> tickets = ticketController.listarTicketsPorPaciente(paciente.getId());
+                    if (tickets.isEmpty()) {
+                        System.out.println("Nenhum ticket encontrado!");
                     } else {
-                        System.out.println("Opção inválida.");
+                        mostrarTickets(tickets);
+                        System.out.print("Selecione o número do Ticket que deseja excluir: ");
+                        int opcaoExcluir = sc.nextInt();
+                        if (opcaoExcluir > 0 && opcaoExcluir <= tickets.size()) {
+                            Ticket ticketSelecionado = tickets.get(opcaoExcluir - 1);
+                            ticketController.excluir(ticketSelecionado.getId());
+                        } else {
+                            System.out.println("Opção inválida.");
+                        }
                     }
-
-                }
-                break;
-            case 3:
-                if (tickets.isEmpty()) {
-                    System.out.println("Nenhum ticket encontrado!.");
-                } else {
-                    System.out.println("Tickets disponíveis:");
-                    for (int i = 0; i < tickets.size(); i++) {
-                        System.out.println((i + 1) + " - Ticket ID: " + tickets.get(i).getId());
-                    }
-                }
-                break;
-            case 4:
-                if (tickets.isEmpty()) {
-                    System.out.println("Nenhum ticket encontrado!.");
-                } else {
-                    System.out.println("Tickets disponíveis:");
-                    for (int i = 0; i < tickets.size(); i++) {
-                        System.out.println((i + 1) + " - Ticket ID: " + tickets.get(i).getId());
-                    }
-
-                    System.out.print("Digite o número do Ticket que deseja atualizar: ");
-                    int opcaoAtualizar = sc.nextInt();
                     break;
                 }
-            case 0:
-                System.out.println("Saindo do menu do paciente...");
-                break;
-            default:
-                System.out.println("Opção inválida. Por favor, tente novamente.");
-                break;
-        }
+
+                case 3: {
+                    List<Ticket> tickets = ticketController.listarTicketsPorPaciente(paciente.getId());
+                    mostrarTickets(tickets);
+                    break;
+                }
+
+                case 4: {
+                    List<Ticket> tickets = ticketController.listarTicketsPorPaciente(paciente.getId());
+                    if (tickets.isEmpty()) {
+                        System.out.println("Nenhum ticket encontrado!");
+                    } else {
+                        mostrarTickets(tickets);
+                        System.out.print("Digite o número do Ticket que deseja atualizar: ");
+                        int opcaoAtualizar = sc.nextInt();
+                        if (opcaoAtualizar > 0 && opcaoAtualizar <= tickets.size()) {
+                            Ticket ticketSelecionado = tickets.get(opcaoAtualizar - 1);
+                            // Aqui você chamaria ticketController.atualizar(ticketSelecionado)
+                        } else {
+                            System.out.println("Opção inválida.");
+                        }
+                    }
+                    break;
+                }
+
+                case 0:
+                    System.out.println("Saindo do menu do paciente...");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida. Por favor, tente novamente.");
+                    break;
+            }
+        } while (opcao != 0);
     }
 
+    private void mostrarTickets(List<Ticket> tickets) {
+        if (tickets.isEmpty()) {
+            System.out.println("Nenhum ticket encontrado!");
+        } else {
+            System.out.println("Tickets disponíveis:");
+            for (int i = 0; i < tickets.size(); i++) {
+                System.out.println((i + 1) + " - Ticket ID: " + tickets.get(i).getId());
+            }
+        }
+    }
 }

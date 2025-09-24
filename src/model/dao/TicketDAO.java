@@ -76,8 +76,10 @@ public class TicketDAO {
         List<Ticket> tickets = new ArrayList<>();
         String sql = "SELECT * FROM TB_TICKET WHERE id_paciente = ?";
 
-        try (Connection conn = ConnectionManager.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try {
+
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setInt(1, idPaciente);
             ResultSet rs = ps.executeQuery();
@@ -95,6 +97,33 @@ public class TicketDAO {
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tickets;
+    }
+
+    public List<Ticket> listarTicketsPorTipoProblema(int idTipoProblema) {
+        List<Ticket> tickets = new ArrayList<>();
+        String sql = "SELECT * FROM TB_TICKET WHERE id_tipo_problema = ?";
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, idTipoProblema);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id_ticket = rs.getInt("id_ticket");
+                int id_paciente = rs.getInt("id_paciente");
+                int id_consulta = rs.getInt("id_consulta");
+
+                TipoProblema tipoProblema = new TipoProblema(idTipoProblema);
+                Paciente paciente = new Paciente(id_paciente);
+                Consulta consulta = new Consulta(id_consulta);
+
+                tickets.add(new Ticket(id_ticket, paciente, tipoProblema, consulta));
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return tickets;

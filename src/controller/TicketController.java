@@ -24,6 +24,10 @@ public class TicketController {
         return ticketDAO.listarTicketsPorPaciente(idPaciente);
     }
 
+    public List<Ticket> listarTicketsPorTipoProblema(int idProblema){
+        return ticketDAO.listarTicketsPorTipoProblema(idProblema);
+    }
+
     public void excluir(int id){
         ticketDAO.excluirTicket(id);
     }
