@@ -23,7 +23,7 @@ public class MedicoLoginView {
 
         Medico medicoSelecionado = medicos.get(1);
 
-        controller.inserir(new MedicoLogin(medicoSelecionado, "loginFernado", "senhaFernando"));
+        controller.inserir(new MedicoLogin( "loginFernado", "senhaFernando", medicoSelecionado));
     }
 
     public void excluirMedicoLogin(int id){

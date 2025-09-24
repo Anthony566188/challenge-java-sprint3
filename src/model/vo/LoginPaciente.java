@@ -1,19 +1,15 @@
 package model.vo;
 
-public class LoginPaciente {
+public class LoginPaciente extends LoginManager{
     private Paciente paciente;
-    private String login;
-    private String senha;
 
-    public LoginPaciente(Paciente paciente, String login, String senha) {
+    public LoginPaciente(String login, String senha, Paciente paciente) {
+        super(login, senha);
         this.paciente = paciente;
-        this.login = login;
-        this.senha = senha;
     }
 
     public LoginPaciente(String login, String senha) {
-        this.login = login;
-        this.senha = senha;
+        super(login, senha);
     }
 
     public Paciente getPaciente() {
@@ -24,19 +20,5 @@ public class LoginPaciente {
         this.paciente = paciente;
     }
 
-    public String getLogin() {
-        return login;
-    }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
 }

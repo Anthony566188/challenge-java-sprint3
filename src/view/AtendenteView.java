@@ -55,13 +55,16 @@ public class AtendenteView {
                     int opcaoTickets;
                     do {
                         System.out.println("-------------------------------------------");
-                        System.out.println("1 - Filtrar por Tipo de Problema");
+                        System.out.println("1 - Selecionar Ticket");
+                        System.out.println("2 - Filtrar por Tipo de Problema");
                         System.out.println("0 - Voltar");
                         System.out.print("Sua opção: ");
                         opcaoTickets = sc.nextInt();
 
                         switch (opcaoTickets) {
                             case 1:
+
+                            case 2:
                                 List<TipoProblema> tiposProblemas = tipoProblemaController.listar();
 
                                 System.out.println("Tipos de Problemas disponíveis:");
@@ -91,7 +94,6 @@ public class AtendenteView {
                                     System.out.println("Opção inválida.");
                                 }
                                 break;
-
                             case 0:
                                 System.out.println("Voltando ao menu do Atendente...");
                                 break;

@@ -27,7 +27,7 @@ public class LoginPacienteView {
 
         Paciente pacienteSelecionado = pacientes.get(0);
 
-        controller.inserir(new LoginPaciente(pacienteSelecionado, "login123", "senha123"));
+        controller.inserir(new LoginPaciente( "login123", "senha123", pacienteSelecionado));
     }
 
     public void autenticarPaciente(){
