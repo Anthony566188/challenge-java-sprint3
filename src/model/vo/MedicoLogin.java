@@ -1,6 +1,6 @@
 package model.vo;
 
-public class MedicoLogin extends LoginManager{
+public class MedicoLogin extends Login {
 
     private Medico medico;
 

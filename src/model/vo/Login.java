@@ -1,11 +1,11 @@
 package model.vo;
 
-public class LoginManager {
+public class Login {
 
     private String login;
     private String senha;
 
-    public LoginManager(String login, String senha) {
+    public Login(String login, String senha) {
         this.login = login;
         this.senha = senha;
     }

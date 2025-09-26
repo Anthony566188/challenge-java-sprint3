@@ -1,9 +1,7 @@
 package model.vo;
 
-public class Paciente {
-    private int id;
-    private String cpf; // UNIQUE
-    private String nome;
+public class Paciente extends  Usuario {
+    private String cpf;
     private String rg;
     private String dataNascimento;
     private String endereco;
@@ -11,9 +9,8 @@ public class Paciente {
 
 
     public Paciente(int id, String cpf, String nome, String rg, String dataNascimento, String endereco) {
-        this.id = id;
+        super(id, nome);
         this.cpf = cpf;
-        this.nome = nome;
         this.rg = rg;
         this.dataNascimento = dataNascimento;
         this.endereco = endereco;
@@ -21,8 +18,8 @@ public class Paciente {
 
     // Construtor sem id
     public Paciente(String cpf, String nome, String rg, String dataNascimento, String endereco) {
+        super(nome);
         this.cpf = cpf;
-        this.nome = nome;
         this.rg = rg;
         this.dataNascimento = dataNascimento;
         this.endereco = endereco;
@@ -30,19 +27,11 @@ public class Paciente {
 
     // apenas o id
     public Paciente(int id){
-        this.id = id;
+        super(id);
     }
 
     public Paciente(){
 
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getCpf() {
@@ -51,14 +40,6 @@ public class Paciente {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getRg() {

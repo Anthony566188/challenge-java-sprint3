@@ -1,6 +1,6 @@
 package model.vo;
 
-public class LoginPaciente extends LoginManager{
+public class LoginPaciente extends Login {
     private Paciente paciente;
 
     public LoginPaciente(String login, String senha, Paciente paciente) {
