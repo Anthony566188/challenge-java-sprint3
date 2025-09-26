@@ -65,6 +65,10 @@ public class ConsultaDAO {
                 consulta.setMedico(medico);
 
                 consultas.add(consulta);
+
+                rs.close();
+                ps.close();
+                conn.close();
             }
         } catch (Exception e) {
             e.printStackTrace();

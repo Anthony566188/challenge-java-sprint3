@@ -75,9 +75,6 @@ public class LoginPacienteDAO {
                 System.out.println("Login ou senha inválidos!");
                 return null;
             }
-
-
-
         } catch (Exception e) {
             System.err.println("Erro ao autenticar: " + e.getMessage());
             return null;

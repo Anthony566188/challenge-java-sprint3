@@ -63,6 +63,10 @@ public class TicketDAO {
                 Consulta consulta = new Consulta(id_consulta);
 
                 tickets.add(new Ticket(id_ticket, paciente, tipoProblema, consulta));
+
+                rs.close();
+                ps.close();
+                conn.close();
             }
 
         } catch (SQLException e) {
@@ -96,6 +100,9 @@ public class TicketDAO {
                 tickets.add(new Ticket(id_ticket, paciente, tipoProblema, consulta));
             }
 
+            rs.close();
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -122,6 +129,10 @@ public class TicketDAO {
                 Consulta consulta = new Consulta(id_consulta);
 
                 tickets.add(new Ticket(id_ticket, paciente, tipoProblema, consulta));
+
+                rs.close();
+                ps.close();
+                conn.close();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -139,6 +150,9 @@ public class TicketDAO {
             ps.setInt(1, id);
             ps.execute();
             System.out.println("Ticket excluído com sucesso!");
+
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             System.err.println("Erro ao excluir Ticket!");
             e.printStackTrace();

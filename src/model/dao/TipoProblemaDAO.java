@@ -54,6 +54,9 @@ public class TipoProblemaDAO {
                 tiposProblemas.add(new TipoProblema(id_tipo_problema, nome_tipo_problema));
             }
 
+            rs.close();
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -69,6 +72,9 @@ public class TipoProblemaDAO {
             ps.setInt(1, id);
             ps.execute();
             System.out.println("Tipo de problema excluído com sucesso!");
+
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             System.err.println("Erro ao excluir Tipo de problema!");
             e.printStackTrace();

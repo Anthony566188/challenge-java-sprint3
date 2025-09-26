@@ -25,8 +25,4 @@ public class LoginAtendenteView {
 
         controller.inserir(new LoginAtendente("login123", "senha123",  atendenteSelecionado));
     }
-
-    public void autenticarAtendente(){
-        controller.autenticar();
-    }
 }

@@ -2,6 +2,7 @@ package view;
 
 import controller.PacienteController;
 import controller.TicketController;
+import controller.TipoProblemaController;
 import model.vo.Consulta;
 import model.vo.Paciente;
 import model.vo.Ticket;
@@ -12,12 +13,12 @@ import java.util.Scanner;
 
 public class PacienteView {
     private PacienteController controller;
-    private TipoProblemaView tipoProblemaView;
+    private TipoProblemaController tipoProblemaController;
     private TicketController ticketController;
 
     public PacienteView() {
         controller = new PacienteController();
-        tipoProblemaView = new TipoProblemaView();
+        tipoProblemaController = new TipoProblemaController();
         ticketController = new TicketController();
     }
 
@@ -58,9 +59,22 @@ public class PacienteView {
 
             switch (opcao) {
                 case 1:
-                    TipoProblema tipoEscolhido = tipoProblemaView.listarTiposProblemas();
-                    if (tipoEscolhido != null) {
-                        ticketController.inserir(new Ticket(paciente, tipoEscolhido, consulta));
+                    List<TipoProblema> tiposProblemas = tipoProblemaController.listar();
+
+                    System.out.println("--- Tipos de Problemas ---");
+                    for (int i = 0; i < tiposProblemas.size(); i++) {
+                        System.out.println((i + 1) + " - " + tiposProblemas.get(i).getNome());
+                    }
+
+                    System.out.print("Selecione o tipo de problema: ");
+                    int opcaoTipoProblema = sc.nextInt();
+                    sc.nextLine();
+
+                    // Validar opção escolhida
+                    if (opcaoTipoProblema > 0 && opcaoTipoProblema <= tiposProblemas.size()) {
+                        ticketController.inserir(new Ticket(paciente, tiposProblemas.get(opcaoTipoProblema - 1), consulta));
+                    } else {
+                        System.out.println("Opção inválida.");
                     }
                     break;
 

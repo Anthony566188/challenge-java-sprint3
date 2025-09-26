@@ -12,7 +12,6 @@ public class Main {
         LoginAtendenteView loginAtendenteView = new LoginAtendenteView();
         EspecialidadeView especialidadeView = new EspecialidadeView();
         MedicoView medicoView = new MedicoView();
-        MedicoLoginView medicoLoginView = new MedicoLoginView();
         LoginManagerView loginManagerView = new LoginManagerView();
         TipoProblemaView tipoProblemaView = new TipoProblemaView();
         ConsultaView consultaView = new ConsultaView();

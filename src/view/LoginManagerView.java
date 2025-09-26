@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 public class LoginManagerView {
 
-    private MedicoLoginController medicoLoginController;
     private LoginPacienteController loginPacienteController;
     private ConsultaController consultaController;
     private LoginAtendenteController loginAtendenteController;
@@ -18,7 +17,6 @@ public class LoginManagerView {
     private AtendenteView atendenteView;
 
     public LoginManagerView(){
-        medicoLoginController = new MedicoLoginController();
         loginPacienteController = new LoginPacienteController();
         consultaController = new ConsultaController();
         loginAtendenteController = new LoginAtendenteController();
@@ -31,18 +29,14 @@ public class LoginManagerView {
         int opcao;
 
         System.out.println("Selecione o tipo de usuário para autenticar:");
-        System.out.println("1 - Médico");
-        System.out.println("2 - Paciente");
-        System.out.println("3 - Atendente");
+        System.out.println("1 - Paciente");
+        System.out.println("2 - Atendente");
         System.out.println("0 - Sair");
         System.out.print("Sua opção: ");
         opcao = sc.nextInt();
 
         switch (opcao) {
             case 1:
-                medicoLoginController.autenticar();
-                break;
-            case 2:
                 Paciente pacienteAutenticado = loginPacienteController.autenticar();
                 if (pacienteAutenticado != null) {
                     List<Consulta> consultaAutenticado = consultaController.listar();
@@ -56,7 +50,7 @@ public class LoginManagerView {
                 }
                 break;
 
-            case 3:
+            case 2:
                 Atendente atendenteAutenticado = loginAtendenteController.autenticar();
                 if (atendenteAutenticado != null) {
                     atendenteView.exibirMenuAtendente();

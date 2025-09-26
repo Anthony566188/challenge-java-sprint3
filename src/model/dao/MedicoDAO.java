@@ -67,6 +67,10 @@ public class MedicoDAO {
                 medicos.add(new Medico(id_medico, especialidade, nome_medico));
             }
 
+            rs.close();
+            ps.close();
+            conn.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

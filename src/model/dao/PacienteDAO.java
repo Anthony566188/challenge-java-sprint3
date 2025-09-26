@@ -30,6 +30,9 @@ public class PacienteDAO {
 
             ps.execute();
             System.out.println("Paciente inserido com sucesso!");
+
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             System.err.println("Erro ao inserir Paciente: " + e.getMessage());
         }
@@ -80,6 +83,9 @@ public class PacienteDAO {
             ps.setInt(1, id);
             ps.execute();
             System.out.println("Paciente excluído com sucesso!");
+
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             System.err.println("Erro ao excluir o Paciente!");
             e.printStackTrace();

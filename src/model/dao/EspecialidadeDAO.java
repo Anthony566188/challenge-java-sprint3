@@ -53,6 +53,10 @@ public class EspecialidadeDAO {
                 especialidades.add(new Especialidade(id_especialidade, nome_especialidade));
             }
 
+            rs.close();
+            ps.close();
+            conn.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
