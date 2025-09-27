@@ -37,4 +37,21 @@ public class ConversaDAO {
             System.err.println("Erro ao criar Conversa: " + e.getMessage());
         }
     }
+
+    public void excluirCoversa(int id) {
+        String sql = "DELETE FROM TB_CONVERSA WHERE id_ticket = ?";
+
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            System.err.println("Erro ao excluir Conversa!");
+            e.printStackTrace();
+        }
+    }
 }

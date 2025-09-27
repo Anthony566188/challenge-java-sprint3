@@ -14,4 +14,9 @@ public class ConversaController {
     public void inserir(Conversa conversa){
         conversaDAO.inserirConversa(conversa);
     }
+
+    public void excluir(int id){
+        conversaDAO.excluirCoversa(id);
+    }
+
 }

@@ -108,6 +108,7 @@ public class PacienteView {
                         int opcaoExcluir = sc.nextInt();
                         if (opcaoExcluir > 0 && opcaoExcluir <= tickets.size()) {
                             Ticket ticketSelecionado = tickets.get(opcaoExcluir - 1);
+                            conversaController.excluir(ticketSelecionado.getId());
                             ticketController.excluir(ticketSelecionado.getId());
                         } else {
                             System.out.println("Opção inválida.");
