@@ -13,8 +13,8 @@ public class TicketController {
         ticketDAO = new TicketDAO();
     }
 
-    public void inserir(Ticket ticket){
-        ticketDAO.inserirTicket(ticket);
+    public int inserir(Ticket ticket){
+        return ticketDAO.inserirTicket(ticket);
     }
 
     public List<Ticket> listar(){

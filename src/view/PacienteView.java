@@ -1,13 +1,9 @@
 package view;
 
-import controller.PacienteController;
-import controller.TicketController;
-import controller.TipoProblemaController;
-import model.vo.Consulta;
-import model.vo.Paciente;
-import model.vo.Ticket;
-import model.vo.TipoProblema;
+import controller.*;
+import model.vo.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,11 +11,15 @@ public class PacienteView {
     private PacienteController controller;
     private TipoProblemaController tipoProblemaController;
     private TicketController ticketController;
+    private ConversaController  conversaController;
+    private AtendenteController atendenteController;
 
     public PacienteView() {
         controller = new PacienteController();
         tipoProblemaController = new TipoProblemaController();
         ticketController = new TicketController();
+        conversaController = new ConversaController();
+        atendenteController = new AtendenteController();
     }
 
     public void inserirPaciente(Paciente paciente) {
@@ -72,7 +72,27 @@ public class PacienteView {
 
                     // Validar opção escolhida
                     if (opcaoTipoProblema > 0 && opcaoTipoProblema <= tiposProblemas.size()) {
-                        ticketController.inserir(new Ticket(paciente, tiposProblemas.get(opcaoTipoProblema - 1), consulta));
+
+                        // 1. Cria o ticket e recupera o id
+                        Ticket novoTicket = new Ticket(paciente, tiposProblemas.get(opcaoTipoProblema - 1), consulta);
+                        int idTicket = ticketController.inserir(novoTicket);
+                        novoTicket.setId(idTicket);
+
+                        List<Atendente> atendentes = atendenteController.listar();
+                        Atendente atendenteSelecionado = atendentes.get(0);
+
+                        System.out.print("Digite o título do ticket: ");
+                        String titulo = sc.nextLine();
+
+                        System.out.print("Faça a descrição do seu problema: ");
+                        String descricao =  sc.nextLine();
+
+
+
+                        conversaController.inserir(new Conversa(atendenteSelecionado, novoTicket, titulo, descricao, "Em aberto", LocalDateTime.now()));
+                        //ticketController.inserir(new Ticket(paciente, tiposProblemas.get(opcaoTipoProblema - 1), consulta));
+
+
                     } else {
                         System.out.println("Opção inválida.");
                     }

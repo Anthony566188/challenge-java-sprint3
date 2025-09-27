@@ -21,6 +21,10 @@ public class Ticket {
         this.consulta = consulta;
     }
 
+    public Ticket(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

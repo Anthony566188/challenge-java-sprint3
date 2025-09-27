@@ -66,9 +66,9 @@ public class ConsultaDAO {
 
                 consultas.add(consulta);
 
-                rs.close();
-                ps.close();
-                conn.close();
+//                rs.close();
+//                ps.close();
+//                conn.close();
             }
         } catch (Exception e) {
             e.printStackTrace();
