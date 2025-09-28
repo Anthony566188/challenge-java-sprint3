@@ -3,6 +3,8 @@ package controller;
 import model.dao.ConversaDAO;
 import model.vo.Conversa;
 
+import java.util.List;
+
 public class ConversaController {
 
     private ConversaDAO conversaDAO;
@@ -13,6 +15,10 @@ public class ConversaController {
 
     public void inserir(Conversa conversa){
         conversaDAO.inserirConversa(conversa);
+    }
+
+    public List<Conversa> listar(){
+        return conversaDAO.listarConversas();
     }
 
     public void excluir(int id){

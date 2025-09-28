@@ -98,6 +98,11 @@ public class PacienteView {
                     }
                     break;
 
+
+
+
+
+
                 case 2: {
                     List<Ticket> tickets = ticketController.listarTicketsPorPaciente(paciente.getId());
                     if (tickets.isEmpty()) {
@@ -120,6 +125,7 @@ public class PacienteView {
                 case 3: {
                     List<Ticket> tickets = ticketController.listarTicketsPorPaciente(paciente.getId());
                     mostrarTickets(tickets);
+
                     break;
                 }
 
@@ -162,4 +168,6 @@ public class PacienteView {
             }
         }
     }
+
+
 }

@@ -17,6 +17,10 @@ public class Atendente extends Usuario {
         this.email = email;
     }
 
+    public Atendente(int id){
+        super(id);
+    }
+
 
     public Atendente() {
 

@@ -1,11 +1,12 @@
 package model.dao;
 
-import model.vo.Atendente;
-import model.vo.Conversa;
-import model.vo.Ticket;
+import model.vo.*;
 import util.ConnectionManager;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConversaDAO {
 
@@ -36,6 +37,43 @@ public class ConversaDAO {
         } catch (SQLException e) {
             System.err.println("Erro ao criar Conversa: " + e.getMessage());
         }
+    }
+
+    public List<Conversa> listarConversas(){
+        List<Conversa> conversas = new ArrayList<Conversa>();
+
+        String sql = "SELECT * FROM TB_CONVERSA (id_atendente, id_ticket, nome_ticket, descricao, status, data_e_hora)";
+
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            //preparar o objeto para receber os dados do Oracle
+            ResultSet rs = ps.executeQuery();
+
+            // percorrer o ResultSet
+            while(rs.next()) {
+                int id_atendente = rs.getInt(1);
+                int id_ticket = rs.getInt(2);
+                String nome_ticket = rs.getString(3);
+                String descricao = rs.getString(4);
+                String status = rs.getString(5);
+                LocalDateTime data_e_hora = rs.getTimestamp(6).toLocalDateTime();
+
+                Atendente atendente = new Atendente(id_atendente);
+                Ticket ticket = new Ticket(id_ticket);
+
+                conversas.add(new Conversa(atendente, ticket, nome_ticket, descricao, status, data_e_hora));
+
+//                rs.close();
+//                ps.close();
+//                conn.close();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return conversas;
     }
 
     public void excluirCoversa(int id) {

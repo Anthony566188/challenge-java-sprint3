@@ -66,9 +66,9 @@ public class TicketDAO {
 
                 tickets.add(new Ticket(id_ticket, paciente, tipoProblema, consulta));
 
-                rs.close();
-                ps.close();
-                conn.close();
+//                rs.close();
+//                ps.close();
+//                conn.close();
             }
 
         } catch (SQLException e) {
