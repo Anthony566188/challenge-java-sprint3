@@ -1,47 +1,92 @@
 package view;
 
+
+
 import controller.*;
+
 import model.vo.*;
 
+
+
 import java.time.LocalDateTime;
+
 import java.util.List;
+
 import java.util.Scanner;
 
+
+
 public class PacienteView {
+
     private PacienteController controller;
+
     private TipoProblemaController tipoProblemaController;
+
     private TicketController ticketController;
+
     private ConversaController  conversaController;
+
     private AtendenteController atendenteController;
 
+
+
     public PacienteView() {
+
         controller = new PacienteController();
+
         tipoProblemaController = new TipoProblemaController();
+
         ticketController = new TicketController();
+
         conversaController = new ConversaController();
+
         atendenteController = new AtendenteController();
+
     }
+
+
 
     public void inserirPaciente(Paciente paciente) {
+
         controller.inserir(paciente);
+
     }
+
+
 
     public void listarPaciente() {
+
         System.out.println("Listando Pacientes...");
+
         for (Paciente paciente : controller.listar()) {
+
             System.out.println("-----------------------------------------------------");
+
             System.out.println("ID: " + paciente.getId());
+
             System.out.println("CPF: " + paciente.getCpf());
+
             System.out.println("Nome: " + paciente.getNome());
+
             System.out.println("Rg: " + paciente.getRg());
+
             System.out.println("Data de nascimento: " + paciente.getDataNascimento());
+
             System.out.println("Endereço:  " + paciente.getEndereco());
+
         }
+
     }
 
+
+
     public void excluirPaciente(int id){
+
         controller.excluir(id);
+
     }
+
+
 
     public void exibirMenuPaciente(Paciente paciente, Consulta consulta) {
         Scanner sc = new Scanner(System.in);
@@ -130,20 +175,25 @@ public class PacienteView {
                 }
 
                 case 4: {
-                    List<Ticket> tickets = ticketController.listarTicketsPorPaciente(paciente.getId());
-                    if (tickets.isEmpty()) {
-                        System.out.println("Nenhum ticket encontrado!");
-                    } else {
-                        mostrarTickets(tickets);
-                        System.out.print("Digite o número do Ticket que deseja atualizar: ");
-                        int opcaoAtualizar = sc.nextInt();
-                        if (opcaoAtualizar > 0 && opcaoAtualizar <= tickets.size()) {
-                            Ticket ticketSelecionado = tickets.get(opcaoAtualizar - 1);
-                            // Aqui você chamaria ticketController.atualizar(ticketSelecionado)
-                        } else {
-                            System.out.println("Opção inválida.");
-                        }
-                    }
+
+                    System.out.print("Digite o ID do Ticket que deseja atualizar: ");
+                    int opcaoAtualizar = sc.nextInt();
+                    System.out.print("Digite o título do Ticket: ");
+                    String titulo = sc.nextLine();
+                    System.out.print("Digite a descrição do Ticket:");
+                    String descricao = sc.nextLine();
+
+                    Ticket ticket = new Ticket(opcaoAtualizar);
+                    Conversa conversa = new Conversa();
+                    conversa.setTicket(ticket);
+                    conversa.setNome_ticket(titulo);
+                    conversa.setDescricao_ticket(descricao);
+                    conversa.setData_e_hora(LocalDateTime.now());
+
+                    conversaController.pacienteAtualizarTicket(conversa);
+
+                    System.out.println("Ticket atualizado com sucesso!");
+
                     break;
                 }
 
@@ -158,16 +208,26 @@ public class PacienteView {
         } while (opcao != 0);
     }
 
+
     private void mostrarTickets(List<Ticket> tickets) {
+
         if (tickets.isEmpty()) {
+
             System.out.println("Nenhum ticket encontrado!");
+
         } else {
+
             System.out.println("Tickets disponíveis:");
+
             for (int i = 0; i < tickets.size(); i++) {
+
                 System.out.println((i + 1) + " - Ticket ID: " + tickets.get(i).getId());
+
             }
+
         }
     }
 
-
 }
+
+

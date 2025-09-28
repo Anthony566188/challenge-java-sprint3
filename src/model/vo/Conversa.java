@@ -11,7 +11,6 @@ public class Conversa {
     private String descricao_ticket;
     private String status;
     private LocalDateTime data_e_hora;
-    //private String conversa;
 
 
     public Conversa(Atendente atendente, Ticket ticket, String nome_ticket, String descricao_ticket, String status, LocalDateTime data_e_hora) {

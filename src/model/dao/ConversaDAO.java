@@ -90,6 +90,28 @@ public class ConversaDAO {
         }
     }
 
+    public void pacienteAtualizarTicket(Conversa conversa) {
+        String sql = "UPDATE TB_CONVERSA SET NOME_TICKET = ?, DESCRICAO_TICKET = ?, DATA_E_HORA = ? WHERE ID_TICKET = ?";
+
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, conversa.getNome_ticket());
+            ps.setString(2, conversa.getDescricao_ticket());
+            ps.setTimestamp(3, Timestamp.valueOf(conversa.getData_e_hora()));
+            ps.setInt(4, conversa.getTicket().getId());
+
+            ps.execute();
+
+
+            System.out.println("Ticket atualizado com sucesso!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public void excluirCoversa(int id) {
         String sql = "DELETE FROM TB_CONVERSA WHERE id_ticket = ?";
 

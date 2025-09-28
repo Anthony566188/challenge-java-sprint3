@@ -6,7 +6,6 @@ import controller.TicketController;
 import controller.TipoProblemaController;
 import model.vo.*;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class AtendenteView {
@@ -81,7 +80,7 @@ public class AtendenteView {
                             conversa.setTicket(ticket);
                             conversa.setStatus("Em andamento");
 
-                            conversaController.atualizar(conversa);
+                            conversaController.atualizarStatusTicket(conversa);
 
                             System.out.println("Resposta enviada com sucesso!");
 
@@ -112,7 +111,7 @@ public class AtendenteView {
                                 conversa.setTicket(ticket);
                                 conversa.setStatus("Em andamento");
 
-                                conversaController.atualizar(conversa);
+                                conversaController.atualizarStatusTicket(conversa);
 
                                 System.out.println("Resposta enviada com sucesso!");
                                 break;
@@ -141,9 +140,9 @@ public class AtendenteView {
                             conversa.setTicket(ticket);
                             conversa.setStatus("Resolvido");
 
-                            conversaController.atualizar(conversa);
+                            conversaController.atualizarStatusTicket(conversa);
 
-                            System.out.println("✅ Ticket finalizado com sucesso!");
+                            System.out.println("Ticket finalizado com sucesso!");
                         } else {
                             System.out.println("Voltando ao menu do atendente...");
                         }

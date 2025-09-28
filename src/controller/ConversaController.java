@@ -21,12 +21,16 @@ public class ConversaController {
         return conversaDAO.listarConversas();
     }
 
-    public void atualizar(Conversa conversa){
+    public void atualizarStatusTicket(Conversa conversa){
         conversaDAO.atualizarStatusTicket(conversa);
     }
 
     public void excluir(int id){
         conversaDAO.excluirCoversa(id);
+    }
+
+    public void pacienteAtualizarTicket(Conversa conversa){
+        conversaDAO.pacienteAtualizarTicket(conversa);
     }
 
 }
