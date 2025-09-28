@@ -23,6 +23,14 @@ public class Conversa {
         this.data_e_hora = data_e_hora;
     }
 
+    public Conversa(Ticket ticket, String nome_ticket, String descricao_ticket, String status, LocalDateTime data_e_hora) {
+        this.ticket = ticket;
+        this.nome_ticket = nome_ticket;
+        this.descricao_ticket = descricao_ticket;
+        this.status = status;
+        this.data_e_hora = data_e_hora;
+    }
+
     public Atendente getAtendente() {
         return atendente;
     }

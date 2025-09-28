@@ -42,7 +42,7 @@ public class ConversaDAO {
     public List<Conversa> listarConversas(){
         List<Conversa> conversas = new ArrayList<Conversa>();
 
-        String sql = "SELECT * FROM TB_CONVERSA (id_atendente, id_ticket, nome_ticket, descricao, status, data_e_hora)";
+        String sql = "SELECT id_ticket, nome_ticket, descricao_ticket, status, data_e_hora FROM TB_CONVERSA";
 
         try {
             Connection conn = ConnectionManager.getConnection();
@@ -53,17 +53,15 @@ public class ConversaDAO {
 
             // percorrer o ResultSet
             while(rs.next()) {
-                int id_atendente = rs.getInt(1);
-                int id_ticket = rs.getInt(2);
-                String nome_ticket = rs.getString(3);
-                String descricao = rs.getString(4);
-                String status = rs.getString(5);
-                LocalDateTime data_e_hora = rs.getTimestamp(6).toLocalDateTime();
+                int id_ticket = rs.getInt("id_ticket");
+                String nome_ticket = rs.getString("nome_ticket");
+                String descricao = rs.getString("descricao_ticket");
+                String status = rs.getString("status");
+                LocalDateTime data_e_hora = rs.getTimestamp("data_e_hora").toLocalDateTime();
 
-                Atendente atendente = new Atendente(id_atendente);
                 Ticket ticket = new Ticket(id_ticket);
 
-                conversas.add(new Conversa(atendente, ticket, nome_ticket, descricao, status, data_e_hora));
+                conversas.add(new Conversa(ticket, nome_ticket, descricao, status, data_e_hora));
 
 //                rs.close();
 //                ps.close();
