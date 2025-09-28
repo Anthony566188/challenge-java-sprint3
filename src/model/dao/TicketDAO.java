@@ -139,7 +139,6 @@ public class TicketDAO {
         return tickets;
     }
 
-
     public void excluirTicket(int id){
         String sql = "DELETE FROM TB_TICKET WHERE ID_TICKET = ?";
 

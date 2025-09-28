@@ -31,6 +31,10 @@ public class Conversa {
         this.data_e_hora = data_e_hora;
     }
 
+    public Conversa(){
+
+    }
+
     public Atendente getAtendente() {
         return atendente;
     }

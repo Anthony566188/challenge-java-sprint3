@@ -74,6 +74,22 @@ public class ConversaDAO {
         return conversas;
     }
 
+    public void atualizarStatusTicket(Conversa conversa) {
+
+        String sql = "UPDATE TB_CONVERSA" + " SET STATUS = ? "
+                + " WHERE ID_TICKET = ? ";
+
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, conversa.getStatus());
+            ps.setInt(2, conversa.getTicket().getId());
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void excluirCoversa(int id) {
         String sql = "DELETE FROM TB_CONVERSA WHERE id_ticket = ?";
 

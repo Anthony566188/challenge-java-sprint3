@@ -21,6 +21,10 @@ public class ConversaController {
         return conversaDAO.listarConversas();
     }
 
+    public void atualizar(Conversa conversa){
+        conversaDAO.atualizarStatusTicket(conversa);
+    }
+
     public void excluir(int id){
         conversaDAO.excluirCoversa(id);
     }

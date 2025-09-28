@@ -1,6 +1,7 @@
 package view;
 
 import controller.AtendenteController;
+import controller.ConversaController;
 import controller.TicketController;
 import controller.TipoProblemaController;
 import model.vo.*;
@@ -15,6 +16,7 @@ public class AtendenteView {
     private TicketController ticketController;
     private TipoProblemaController tipoProblemaController;
     private ConversaView conversaView;
+    private ConversaController conversaController;
 
     public AtendenteView() {
         controller = new AtendenteController();
@@ -22,6 +24,7 @@ public class AtendenteView {
         ticketController = new TicketController();
         tipoProblemaController = new TipoProblemaController();
         conversaView = new ConversaView();
+        conversaController = new ConversaController();
     }
 
     public void inserirAtendente(Atendente atendente){
@@ -49,7 +52,6 @@ public class AtendenteView {
             System.out.println("2 - Ver Tickets em aberto");
             System.out.println("3 - Ver Tickets em andamento");
             System.out.println("4 - Ver tickets Resolvidos");
-            System.out.println("5 - Filtrar Tickets por tipo de problema");
             System.out.println("0 - Sair");
             System.out.print("Sua opção: ");
             opcao = sc.nextInt();
@@ -59,93 +61,99 @@ public class AtendenteView {
                     System.out.println("--- Listando todos os Tickets ---");
                     conversaView.listarConversas();
 
-//                    int opcaoTickets;
-//                    do {
-//                        System.out.println("-------------------------------------------");
-//                        System.out.println("1 - Selecionar Ticket");
-//                        System.out.println("2 - Filtrar por Tipo de Problema");
-//                        System.out.println("0 - Voltar");
-//                        System.out.print("Sua opção: ");
-//                        opcaoTickets = sc.nextInt();
-//
-//                        switch (opcaoTickets) {
-//                            case 1:
-//                                System.out.println("Digite o ");
-//                            case 2:
-//                                List<TipoProblema> tiposProblemas = tipoProblemaController.listar();
-//
-//                                System.out.println("Tipos de Problemas disponíveis:");
-//                                for (int i = 0; i < tiposProblemas.size(); i++) {
-//                                    System.out.println((i + 1) + " - " + tiposProblemas.get(i).getNome());
-//                                }
-//
-//                                System.out.print("Selecione o número do Tipo de problema que deseja filtrar: ");
-//                                int opcaoFiltrar = sc.nextInt();
-//
-//                                if (opcaoFiltrar > 0 && opcaoFiltrar <= tiposProblemas.size()) {
-//                                    TipoProblema tipoProblemaSelecionado = tiposProblemas.get(opcaoFiltrar - 1);
-//                                    List<Ticket> ticketsFiltrados =
-//                                            ticketController.listarTicketsPorTipoProblema(tipoProblemaSelecionado.getId());
-//
-//                                    if (ticketsFiltrados.isEmpty()) {
-//                                        System.out.println("Nenhum ticket encontrado para esse tipo de problema.");
-//                                    } else {
-//                                        System.out.println("Tickets filtrados:");
-//                                        for (Ticket t : ticketsFiltrados) {
-//                                            System.out.println("Ticket ID: " + t.getId() +
-//                                                    " | Paciente ID: " + t.getPaciente().getId() +
-//                                                    " | Tipo: " + tipoProblemaSelecionado.getNome());
-//                                        }
-//                                    }
-//                                } else {
-//                                    System.out.println("Opção inválida.");
-//                                }
-//                                break;
-//                            case 0:
-//                                System.out.println("Voltando ao menu do Atendente...");
-//                                break;
-//
-//                            default:
-//                                System.out.println("Opção inválida.");
-//                                break;
-//                        }
-//                    } while (opcaoTickets != 0);
+                    System.out.println("------------------------------------------------------");
+                    System.out.println("1 - Responder Ticket");
+                    System.out.print("Sua opcao: ");
+                    int opcaoTodosTicket = sc.nextInt();
+
+                    switch (opcaoTodosTicket){
+                        case 1:
+                            System.out.print("Digite o ID do Ticket que deseja responder: ");
+                            int idTicket = sc.nextInt();
+                            sc.nextLine();
+
+                            System.out.print("Digite sua resposta: ");
+                            String resposta = sc.nextLine();
+
+
+                            Ticket ticket = new Ticket(idTicket);
+                            Conversa conversa = new Conversa();
+                            conversa.setTicket(ticket);
+                            conversa.setStatus("Em andamento");
+
+                            conversaController.atualizar(conversa);
+
+                            System.out.println("Resposta enviada com sucesso!");
+
+                            break;
+                    }
                     break;
                 case 2:
                     System.out.println("--- Listando Tickets em aberto ---");
-                    conversaView.listarConversasPorStatus("Em aberto");
-                    break;
-                case 5:
-                    List<TipoProblema> tiposProblemas = tipoProblemaController.listar();
-//
-                    System.out.println("Tipos de Problemas disponíveis:");
-                    for (int i = 0; i < tiposProblemas.size(); i++) {
-                        System.out.println((i + 1) + " - " + tiposProblemas.get(i).getNome());
-                    }
+                    boolean temTicketsAbertos = conversaView.listarConversasPorStatus("Em aberto");
 
-                    System.out.print("Selecione o número do Tipo de problema que deseja filtrar: ");
-                    int opcaoFiltrar = sc.nextInt();
+                    if (temTicketsAbertos) {
+                        System.out.println("------------------------------------------------------");
+                        System.out.println("1 - Responder Ticket");
+                        System.out.print("Sua opcao: ");
+                        int opcaoTicketsAbertos = sc.nextInt();
 
-                    if (opcaoFiltrar > 0 && opcaoFiltrar <= tiposProblemas.size()) {
-                        TipoProblema tipoProblemaSelecionado = tiposProblemas.get(opcaoFiltrar - 1);
-                        List<Ticket> ticketsFiltrados =
-                                ticketController.listarTicketsPorTipoProblema(tipoProblemaSelecionado.getId());
+                        switch (opcaoTicketsAbertos) {
+                            case 1:
+                                System.out.print("Digite o ID do Ticket que deseja responder: ");
+                                int idTicket = sc.nextInt();
+                                sc.nextLine();
 
-                        if (ticketsFiltrados.isEmpty()) {
-                            System.out.println("Nenhum ticket encontrado para esse tipo de problema.");
-                        } else {
-                            System.out.println("-----------------------------------------------------------");
-                            System.out.println("Tickets filtrados:");
-                            for (Ticket t : ticketsFiltrados) {
-                                System.out.println("Ticket ID: " + t.getId() +
-                                        " | Paciente ID: " + t.getPaciente().getId() +
-                                        " | Tipo: " + tipoProblemaSelecionado.getNome());
-                            }
+                                System.out.print("Digite sua resposta: ");
+                                String resposta = sc.nextLine();
+
+                                Ticket ticket = new Ticket(idTicket);
+                                Conversa conversa = new Conversa();
+                                conversa.setTicket(ticket);
+                                conversa.setStatus("Em andamento");
+
+                                conversaController.atualizar(conversa);
+
+                                System.out.println("Resposta enviada com sucesso!");
+                                break;
+
+                            default:
+                                System.out.println("Opção inválida. Por favor, tente novamente.");
+                                break;
                         }
-                    } else {
-                        System.out.println("Opção inválida.");
                     }
                     break;
+                case 3:
+                    System.out.println("--- Listando Tickets em andamento ---");
+                    boolean temTicketsAndamento = conversaView.listarConversasPorStatus("Em andamento");
+
+                    if (temTicketsAndamento) {
+                        System.out.println("------------------------------------------------------");
+                        System.out.print("Deseja finalizar um Ticket? (S/N): ");
+                        String opcaoFinalizar = sc.next().trim().toUpperCase();
+
+                        if (opcaoFinalizar.equals("S")) {
+                            System.out.print("Digite o ID do Ticket que deseja finalizar: ");
+                            int idTicketFinalizar = sc.nextInt();
+
+                            Ticket ticket = new Ticket(idTicketFinalizar);
+                            Conversa conversa = new Conversa();
+                            conversa.setTicket(ticket);
+                            conversa.setStatus("Resolvido");
+
+                            conversaController.atualizar(conversa);
+
+                            System.out.println("✅ Ticket finalizado com sucesso!");
+                        } else {
+                            System.out.println("Voltando ao menu do atendente...");
+                        }
+                    }
+                    break;
+                case 4:
+                    System.out.println("--- Listando Tickets Resolvidos ---");
+                    conversaView.listarConversasPorStatus("Resolvido");
+                    break;
+
                 case 0:
                     System.out.println("Saindo do menu do Atendente...");
                     break;
