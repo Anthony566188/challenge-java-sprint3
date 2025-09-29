@@ -20,4 +20,8 @@ public class AtendenteController {
     public List<Atendente> listar(){
         return atendenteDAO.listarAtendentes();
     }
+
+    public void atualizar(Atendente atendente){
+        atendenteDAO.atualizarAtendente(atendente);
+    }
 }

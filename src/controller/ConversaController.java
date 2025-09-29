@@ -26,7 +26,7 @@ public class ConversaController {
     }
 
     public void excluir(int id){
-        conversaDAO.excluirCoversa(id);
+        conversaDAO.excluirConversa(id);
     }
 
     public void pacienteAtualizarTicket(Conversa conversa){

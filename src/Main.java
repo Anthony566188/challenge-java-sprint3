@@ -16,7 +16,7 @@ public class Main {
         TipoProblemaView tipoProblemaView = new TipoProblemaView();
         ConsultaView consultaView = new ConsultaView();
         TicketView ticketView = new TicketView();
-
+        ConversaView conversaView = new ConversaView();
 
 
 

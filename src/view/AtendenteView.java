@@ -41,6 +41,10 @@ public class AtendenteView {
 
     }
 
+    public void atualizarAtendente(Atendente atendente){
+        controller.atualizar(atendente);
+    }
+
     public void exibirMenuAtendente() {
         Scanner sc = new Scanner(System.in);
         int opcao;

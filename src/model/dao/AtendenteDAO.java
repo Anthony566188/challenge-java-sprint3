@@ -66,4 +66,25 @@ public class AtendenteDAO {
         return atendentes;
     }
 
+    public void atualizarAtendente(Atendente atendente) {
+        System.out.println(" --- atualizando o atendente " + atendente.getNome() + " --- ");
+
+        String sql = "UPDATE TB_ATENDENTE" + " SET NOME_ATENDENTE = ?, EMAIL_ATENDENTE = ? WHERE ID_ATENDENTE = ? ";
+
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, atendente.getNome());
+            ps.setString(2, atendente.getEmail());
+            ps.setInt(3, atendente.getId());
+            ps.execute();
+            System.out.println("Atendente atualizado com sucesso");
+
+            ps.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -112,7 +112,7 @@ public class ConversaDAO {
     }
 
 
-    public void excluirCoversa(int id) {
+    public void excluirConversa(int id) {
         String sql = "DELETE FROM TB_CONVERSA WHERE id_ticket = ?";
 
         try {

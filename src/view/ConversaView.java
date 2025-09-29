@@ -48,21 +48,7 @@ public class ConversaView {
         return encontrou; // devolve se achou ou não
     }
 
-
-
-//    public void mostrarConversas(List<Conversa> conversas) {
-//        if (conversas.isEmpty()) {
-//            System.out.println("Nenhum ticket encontrado!");
-//        } else {
-//            System.out.println("Tickets disponíveis:");
-//            for (int i = 0; i < conversas.size(); i++) {
-//                System.out.println((i + 1) + " - Ticket ID: " + conversas.get(i).getTicket().getId());
-//                System.out.println("Título: " + conversas.get(i).getNome_ticket());
-//                System.out.println("Descrição: " + conversas.get(i).getDescricao_ticket());
-//                System.out.println("Status: " + conversas.get(i).getStatus());
-//                System.out.println("Data de hora: " + conversas.get(i).getData_e_hora());
-//            }
-//        }
-//    }
-
+    public void excluirConversa(int id) {
+        controller.excluir(id);
+    }
 }
