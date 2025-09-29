@@ -1,6 +1,5 @@
 package model.dao;
 
-import model.vo.Atendente;
 import model.vo.Especialidade;
 import util.ConnectionManager;
 

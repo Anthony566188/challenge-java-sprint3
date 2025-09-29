@@ -5,7 +5,6 @@ import controller.LoginAtendenteController;
 import model.vo.Atendente;
 import model.vo.LoginAtendente;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LoginAtendenteView {

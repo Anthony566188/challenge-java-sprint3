@@ -2,10 +2,8 @@ package view;
 
 import controller.EspecialidadeController;
 import controller.MedicoController;
-import model.vo.Atendente;
 import model.vo.Especialidade;
 import model.vo.Medico;
-import model.vo.Paciente;
 
 import java.util.List;
 

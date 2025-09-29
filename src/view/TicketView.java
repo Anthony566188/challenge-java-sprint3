@@ -4,12 +4,7 @@ import controller.ConsultaController;
 import controller.PacienteController;
 import controller.TicketController;
 import controller.TipoProblemaController;
-import model.vo.Consulta;
-import model.vo.Paciente;
 import model.vo.Ticket;
-import model.vo.TipoProblema;
-
-import java.util.List;
 
 public class TicketView {
 

@@ -4,7 +4,6 @@ import model.vo.*;
 import util.ConnectionManager;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,31 +28,26 @@ public class TicketDAO {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 int idGerado = rs.getInt(1);
-                //System.out.println("Ticket criado com ID: " + idGerado);
                 return idGerado;
             }
         } catch (SQLException e) {
             System.err.println("Erro ao criar Ticket: " + e.getMessage());
         }
-        return -1; // se deu erro
+        return -1;
     }
 
 
     public List<Ticket> listarTickets(){
-        //criar a lista de Tickets
         List<Ticket> tickets = new ArrayList<Ticket>();
 
-        //configurar a query
         String sql = "SELECT * FROM TB_TICKET";
 
         try {
             Connection conn = ConnectionManager.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            //preparar o objeto para receber os dados do Oracle
             ResultSet rs = ps.executeQuery();
 
-            // percorrer o ResultSet
             while(rs.next()) {
                 int id_ticket = rs.getInt(1);
                 int id_paciente = rs.getInt(2);
@@ -66,9 +60,6 @@ public class TicketDAO {
 
                 tickets.add(new Ticket(id_ticket, paciente, tipoProblema, consulta));
 
-//                rs.close();
-//                ps.close();
-//                conn.close();
             }
 
         } catch (SQLException e) {

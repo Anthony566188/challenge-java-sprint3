@@ -1,7 +1,6 @@
 package model.dao;
 
 import model.vo.Atendente;
-import model.vo.Paciente;
 import util.ConnectionManager;
 
 import java.sql.Connection;

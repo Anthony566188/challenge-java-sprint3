@@ -2,7 +2,6 @@ package view;
 
 import controller.EspecialidadeController;
 import model.vo.Especialidade;
-import model.vo.Paciente;
 
 public class EspecialidadeView {
 

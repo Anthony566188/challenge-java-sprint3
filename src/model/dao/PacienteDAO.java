@@ -1,7 +1,6 @@
 package model.dao;
 
-import model.vo.Atendente;
-import model.vo.LoginPaciente;
+
 import model.vo.Paciente;
 import util.ConnectionManager;
 
@@ -40,20 +39,16 @@ public class PacienteDAO {
     }
 
     public List<Paciente> listarPacientes(){
-        //criar a lista de tickets
         List<Paciente> pacientes = new ArrayList<Paciente>();
 
-        //configurar a query
         String sql = "SELECT * FROM TB_PACIENTE";
 
         try {
             Connection conn = ConnectionManager.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            //preparar o objeto para receber os dados do Oracle
             ResultSet rs = ps.executeQuery();
 
-            // percorrer o ResultSet
             while(rs.next()) {
                 int id_paciente = rs.getInt(1);
                 String cpf_paciente = rs.getString(2);

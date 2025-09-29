@@ -1,13 +1,8 @@
 package view;
 
 import controller.TipoProblemaController;
-import model.vo.Consulta;
-import model.vo.Medico;
-import model.vo.Ticket;
 import model.vo.TipoProblema;
 
-import java.util.List;
-import java.util.Scanner;
 
 public class TipoProblemaView {
 

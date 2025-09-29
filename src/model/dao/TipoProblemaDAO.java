@@ -1,6 +1,5 @@
 package model.dao;
 
-import model.vo.Especialidade;
 import model.vo.TipoProblema;
 import util.ConnectionManager;
 
@@ -33,20 +32,16 @@ public class TipoProblemaDAO {
     }
 
     public List<TipoProblema> listarTiposProblemas(){
-        //criar a lista de Tipos de Problemas
         List<TipoProblema> tiposProblemas = new ArrayList<TipoProblema>();
 
-        //configurar a query
         String sql = "SELECT * FROM TB_TIPO_PROBLEMA";
 
         try {
             Connection conn = ConnectionManager.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            //preparar o objeto para receber os dados do Oracle
             ResultSet rs = ps.executeQuery();
 
-            // percorrer o ResultSet
             while(rs.next()) {
                 int id_tipo_problema = rs.getInt(1);
                 String nome_tipo_problema = rs.getString(2);

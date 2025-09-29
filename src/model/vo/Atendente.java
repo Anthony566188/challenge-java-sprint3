@@ -9,7 +9,6 @@ public class Atendente extends Usuario {
         this.email = email;
     }
 
-    // Construtor sem id
 
 
     public Atendente(String nome, String email) {

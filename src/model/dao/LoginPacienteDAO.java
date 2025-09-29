@@ -1,6 +1,5 @@
 package model.dao;
 
-import model.vo.LoginAtendente;
 import model.vo.LoginPaciente;
 import model.vo.Paciente;
 import util.ConnectionManager;
