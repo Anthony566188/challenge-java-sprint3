@@ -2,8 +2,6 @@ package view;
 
 import controller.AtendenteController;
 import controller.ConversaController;
-import controller.TicketController;
-import controller.TipoProblemaController;
 import model.vo.*;
 
 import java.util.Scanner;
@@ -11,20 +9,36 @@ import java.util.Scanner;
 public class AtendenteView {
 
     private AtendenteController controller;
-    private TicketView ticketView;
-    private TicketController ticketController;
-    private TipoProblemaController tipoProblemaController;
     private ConversaView conversaView;
     private ConversaController conversaController;
 
     public AtendenteView() {
         controller = new AtendenteController();
-        ticketView = new TicketView();
-        ticketController = new TicketController();
-        tipoProblemaController = new TipoProblemaController();
         conversaView = new ConversaView();
         conversaController = new ConversaController();
     }
+
+    // ---------------- MÉTODOS AUXILIARES ----------------
+
+    private void atualizarStatusTicket(int idTicket, String status) {
+        Ticket ticket = new Ticket(idTicket);
+        Conversa conversa = new Conversa();
+        conversa.setTicket(ticket);
+        conversa.setStatus(status);
+        conversaController.atualizarStatusTicket(conversa);
+    }
+
+    private int exibirSubMenu(String titulo, String... opcoes) {
+        System.out.println("------------------------------------------------------");
+        System.out.println(titulo);
+        for (int i = 0; i < opcoes.length; i++) {
+            System.out.println((i + 1) + " - " + opcoes[i]);
+        }
+        System.out.print("Sua opção: ");
+        return new Scanner(System.in).nextInt();
+    }
+
+    // ---------------- CRUD ATENDENTE ----------------
 
     public void inserirAtendente(Atendente atendente){
         controller.inserir(atendente);
@@ -38,12 +52,13 @@ public class AtendenteView {
             System.out.println("Nome: " + atendente.getNome());
             System.out.println("Email: " + atendente.getEmail());
         }
-
     }
 
     public void atualizarAtendente(Atendente atendente){
         controller.atualizar(atendente);
     }
+
+    // ---------------- MENU ----------------
 
     public void exibirMenuAtendente() {
         Scanner sc = new Scanner(System.in);
@@ -62,96 +77,52 @@ public class AtendenteView {
             switch (opcao) {
                 case 1:
                     System.out.println("--- Listando todos os Tickets ---");
-                    conversaView.listarConversas();
-
-                    System.out.println("------------------------------------------------------");
-                    System.out.println("1 - Responder Ticket");
-                    System.out.print("Sua opcao: ");
-                    int opcaoTodosTicket = sc.nextInt();
-
-                    switch (opcaoTodosTicket){
-                        case 1:
+                    if (conversaView.listarConversas()) {
+                        int opcaoTodos = exibirSubMenu("Opções", "Responder Ticket");
+                        if (opcaoTodos == 1) {
                             System.out.print("Digite o ID do Ticket que deseja responder: ");
                             int idTicket = sc.nextInt();
-                            sc.nextLine();
-
+                            sc.nextLine(); // consumir quebra de linha
                             System.out.print("Digite sua resposta: ");
-                            String resposta = sc.nextLine();
-
-
-                            Ticket ticket = new Ticket(idTicket);
-                            Conversa conversa = new Conversa();
-                            conversa.setTicket(ticket);
-                            conversa.setStatus("Em andamento");
-
-                            conversaController.atualizarStatusTicket(conversa);
-
+                            sc.nextLine(); // resposta ignorada por enquanto
+                            atualizarStatusTicket(idTicket, "Em andamento");
                             System.out.println("Resposta enviada com sucesso!");
-
-                            break;
-                    }
-                    break;
-                case 2:
-                    System.out.println("--- Listando Tickets em aberto ---");
-                    boolean temTicketsAbertos = conversaView.listarConversasPorStatus("Em aberto");
-
-                    if (temTicketsAbertos) {
-                        System.out.println("------------------------------------------------------");
-                        System.out.println("1 - Responder Ticket");
-                        System.out.print("Sua opcao: ");
-                        int opcaoTicketsAbertos = sc.nextInt();
-
-                        switch (opcaoTicketsAbertos) {
-                            case 1:
-                                System.out.print("Digite o ID do Ticket que deseja responder: ");
-                                int idTicket = sc.nextInt();
-                                sc.nextLine();
-
-                                System.out.print("Digite sua resposta: ");
-                                String resposta = sc.nextLine();
-
-                                Ticket ticket = new Ticket(idTicket);
-                                Conversa conversa = new Conversa();
-                                conversa.setTicket(ticket);
-                                conversa.setStatus("Em andamento");
-
-                                conversaController.atualizarStatusTicket(conversa);
-
-                                System.out.println("Resposta enviada com sucesso!");
-                                break;
-
-                            default:
-                                System.out.println("Opção inválida. Por favor, tente novamente.");
-                                break;
                         }
                     }
                     break;
+
+                case 2:
+                    System.out.println("--- Listando Tickets em aberto ---");
+                    if (conversaView.listarConversasPorStatus("Em aberto")) {
+                        int opcaoAbertos = exibirSubMenu("Opções", "Responder Ticket");
+                        if (opcaoAbertos == 1) {
+                            System.out.print("Digite o ID do Ticket que deseja responder: ");
+                            int idTicket = sc.nextInt();
+                            sc.nextLine();
+                            System.out.print("Digite sua resposta: ");
+                            sc.nextLine();
+                            atualizarStatusTicket(idTicket, "Em andamento");
+                            System.out.println("Resposta enviada com sucesso!");
+                        }
+                    }
+                    break;
+
                 case 3:
                     System.out.println("--- Listando Tickets em andamento ---");
-                    boolean temTicketsAndamento = conversaView.listarConversasPorStatus("Em andamento");
-
-                    if (temTicketsAndamento) {
-                        System.out.println("------------------------------------------------------");
+                    if (conversaView.listarConversasPorStatus("Em andamento")) {
                         System.out.print("Deseja finalizar um Ticket? (S/N): ");
                         String opcaoFinalizar = sc.next().trim().toUpperCase();
-
                         if (opcaoFinalizar.equals("S")) {
                             System.out.print("Digite o ID do Ticket que deseja finalizar: ");
                             int idTicketFinalizar = sc.nextInt();
-
-                            Ticket ticket = new Ticket(idTicketFinalizar);
-                            Conversa conversa = new Conversa();
-                            conversa.setTicket(ticket);
-                            conversa.setStatus("Resolvido");
-
-                            conversaController.atualizarStatusTicket(conversa);
-
+                            atualizarStatusTicket(idTicketFinalizar, "Resolvido");
                             System.out.println("Ticket finalizado com sucesso!");
                         } else {
                             System.out.println("Voltando ao menu do atendente...");
                         }
                     }
                     break;
+
                 case 4:
                     System.out.println("--- Listando Tickets Resolvidos ---");
                     conversaView.listarConversasPorStatus("Resolvido");
