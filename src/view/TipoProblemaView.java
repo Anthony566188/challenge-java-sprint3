@@ -30,6 +30,10 @@ public class TipoProblemaView {
         }
     }
 
+    public void atualizarTipoProblema(TipoProblema tipoProblema) {
+        controller.atualizar(tipoProblema);
+    }
+
     public void excluirTipoProblema(int id) {
         controller.excluir(id);
     }

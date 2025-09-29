@@ -21,6 +21,10 @@ public class TipoProblemaController {
         return tipoProblemaDAO.listarTiposProblemas();
     }
 
+    public void atualizar(TipoProblema tipoProblema) {
+        tipoProblemaDAO.atualizarTipoProblema(tipoProblema);
+    }
+
     public void excluir(int id) {
         tipoProblemaDAO.excluirTipoProblema(id);
     }

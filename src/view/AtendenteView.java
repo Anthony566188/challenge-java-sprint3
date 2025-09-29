@@ -78,15 +78,21 @@ public class AtendenteView {
                 case 1:
                     System.out.println("--- Listando todos os Tickets ---");
                     if (conversaView.listarConversas()) {
-                        int opcaoTodos = exibirSubMenu("Opções", "Responder Ticket");
+                        int opcaoTodos = exibirSubMenu("Opções", "Responder Ticket", "Voltar para o Menu");
+
                         if (opcaoTodos == 1) {
                             System.out.print("Digite o ID do Ticket que deseja responder: ");
                             int idTicket = sc.nextInt();
                             sc.nextLine(); // consumir quebra de linha
                             System.out.print("Digite sua resposta: ");
-                            sc.nextLine(); // resposta ignorada por enquanto
+                            sc.nextLine();
                             atualizarStatusTicket(idTicket, "Em andamento");
                             System.out.println("Resposta enviada com sucesso!");
+                        }
+                        else if (opcaoTodos == 2) {
+                            System.out.println("Voltando ao menu principal...");
+                        } else {
+                            System.out.println("Opção inválida.");
                         }
                     }
                     break;
@@ -94,7 +100,7 @@ public class AtendenteView {
                 case 2:
                     System.out.println("--- Listando Tickets em aberto ---");
                     if (conversaView.listarConversasPorStatus("Em aberto")) {
-                        int opcaoAbertos = exibirSubMenu("Opções", "Responder Ticket");
+                        int opcaoAbertos = exibirSubMenu("Opções", "Responder Ticket", "Voltar para o Menu");
                         if (opcaoAbertos == 1) {
                             System.out.print("Digite o ID do Ticket que deseja responder: ");
                             int idTicket = sc.nextInt();
@@ -103,6 +109,11 @@ public class AtendenteView {
                             sc.nextLine();
                             atualizarStatusTicket(idTicket, "Em andamento");
                             System.out.println("Resposta enviada com sucesso!");
+                        }
+                        else if (opcaoAbertos == 2) {
+                            System.out.println("Voltando ao menu principal...");
+                        } else {
+                            System.out.println("Opção inválida.");
                         }
                     }
                     break;

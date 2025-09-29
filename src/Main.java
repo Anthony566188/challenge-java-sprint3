@@ -21,7 +21,7 @@ public class Main {
 
 
         
-        //loginManagerView.autenticarUsuario();
+        loginManagerView.autenticarUsuario();
 
 
     }

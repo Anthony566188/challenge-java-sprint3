@@ -63,6 +63,27 @@ public class TipoProblemaDAO {
         return tiposProblemas;
     }
 
+    public void atualizarTipoProblema(TipoProblema tipoProblema) {
+        System.out.println(" --- atualizando o Tipo de Problema " + tipoProblema.getNome() + " --- ");
+
+        String sql = "UPDATE TB_TIPO_PROBLEMA" + " SET NOME_TIPO_PROBLEMA = ? WHERE ID_TIPO_PROBLEMA = ? ";
+
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, tipoProblema.getNome());
+            ps.setInt(2, tipoProblema.getId());
+            ps.execute();
+            System.out.println("Tipo de problema atualizado com sucesso!");
+
+            ps.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void excluirTipoProblema(int id){
         String sql = "DELETE FROM TB_TIPO_PROBLEMA WHERE ID_TIPO_PROBLEMA = ?";
 
