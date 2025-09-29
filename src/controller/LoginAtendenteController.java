@@ -19,4 +19,8 @@ public class LoginAtendenteController {
     public Atendente autenticar(){
         return loginAtendenteDAO.autenticarAtendente();
     }
+
+    public void Atualizar(LoginAtendente loginAtendente){
+        loginAtendenteDAO.atualizarLoginAtendente(loginAtendente);
+    }
 }

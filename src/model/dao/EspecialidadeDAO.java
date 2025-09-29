@@ -1,5 +1,6 @@
 package model.dao;
 
+import model.vo.Atendente;
 import model.vo.Especialidade;
 import util.ConnectionManager;
 
@@ -61,6 +62,27 @@ public class EspecialidadeDAO {
             e.printStackTrace();
         }
         return especialidades;
+    }
+
+    public void atualizarEspecialidade(Especialidade especialidade) {
+        System.out.println(" --- atualizando a especialidade " + especialidade.getNome() + " --- ");
+
+        String sql = "UPDATE TB_ESPECIALIDADE" + " SET NOME_ESPECIALIDADE = ? WHERE ID_ESPECIALIDADE = ? ";
+
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, especialidade.getNome());
+            ps.setInt(2, especialidade.getId());
+            ps.execute();
+            System.out.println("Especialidade atualizada com sucesso");
+
+            ps.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void excluirEspecialidade(int id){

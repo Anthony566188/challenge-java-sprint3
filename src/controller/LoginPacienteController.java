@@ -21,4 +21,8 @@ public class LoginPacienteController {
         return loginPacienteDAO.autenticarPaciente();
     }
 
+    public void atualizar(LoginPaciente loginPaciente) {
+        loginPacienteDAO.atualizarLoginPaciente(loginPaciente);
+    }
+
 }

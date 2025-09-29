@@ -29,4 +29,8 @@ public class LoginPacienteView {
 
         controller.inserir(new LoginPaciente( "login123", "senha123", pacienteSelecionado));
     }
+
+    public void atualizarLoginPaciente(LoginPaciente loginPaciente){
+        controller.atualizar(loginPaciente);
+    }
 }

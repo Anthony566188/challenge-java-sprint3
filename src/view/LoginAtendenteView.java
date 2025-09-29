@@ -25,4 +25,8 @@ public class LoginAtendenteView {
 
         controller.inserir(new LoginAtendente("login123", "senha123",  atendenteSelecionado));
     }
+
+    public void atualizarLoginAtendente(LoginAtendente loginAtendente){
+        controller.Atualizar(loginAtendente);
+    }
 }

@@ -35,4 +35,8 @@ public class PacienteController {
         pacienteDAO.excluirPaciente(id);
     }
 
+    public void atualizar(Paciente paciente){
+        pacienteDAO.atualizarPaciente(paciente);
+    }
+
 }

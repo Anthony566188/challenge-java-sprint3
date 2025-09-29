@@ -1,9 +1,6 @@
 package model.dao;
 
-import model.vo.Consulta;
-import model.vo.Especialidade;
-import model.vo.Medico;
-import model.vo.Paciente;
+import model.vo.*;
 import util.ConnectionManager;
 
 import java.sql.*;
@@ -75,7 +72,5 @@ public class ConsultaDAO {
         }
         return consultas;
     }
-
-
 
 }

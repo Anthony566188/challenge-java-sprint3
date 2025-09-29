@@ -1,5 +1,6 @@
 package model.dao;
 
+import model.vo.Atendente;
 import model.vo.LoginPaciente;
 import model.vo.Paciente;
 import util.ConnectionManager;
@@ -72,6 +73,31 @@ public class PacienteDAO {
             e.printStackTrace();
         }
         return pacientes;
+    }
+
+    public void atualizarPaciente(Paciente paciente) {
+        System.out.println(" --- atualizando o paciente " + paciente.getNome() + " --- ");
+
+        String sql = "UPDATE TB_PACIENTE" + " SET CPF_PACIENTE = ?, NOME_PACIENTE = ?, RG_PACIENTE = ?, DATA_NASCIMENTO_PACIENTE = ?, ENDERECO_PACIENTE = ?  WHERE ID_PACIENTE = ? ";
+
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, paciente.getCpf());
+            ps.setString(2, paciente.getNome());
+            ps.setString(3, paciente.getRg());
+            ps.setString(4, paciente.getDataNascimento());
+            ps.setString(5, paciente.getEndereco());
+            ps.setInt(6, paciente.getId());
+            ps.execute();
+            System.out.println("Paciente atualizado com sucesso!");
+
+            ps.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void excluirPaciente(int id){

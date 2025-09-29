@@ -7,7 +7,7 @@ public class Consulta {
     private int id;
     private Paciente paciente;
     private Medico medico;
-    private LocalDateTime dataEHoraInicio; // TIPO DOS ATRIBUTOS DATA E HORA MUDADO POR INCOMPATIBILIDADE COM O BANCO DE DADOS
+    private LocalDateTime dataEHoraInicio;
     private LocalDateTime dataEHoraFim;
 
     public Consulta(int id, Paciente paciente, Medico medico, LocalDateTime dataEHoraInicio, LocalDateTime dataEHoraFim) {

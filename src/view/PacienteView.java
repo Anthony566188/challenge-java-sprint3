@@ -78,6 +78,10 @@ public class PacienteView {
 
     }
 
+    public void atualizarPaciente(Paciente paciente) {
+        controller.atualizar(paciente);
+    }
+
 
 
     public void excluirPaciente(int id){

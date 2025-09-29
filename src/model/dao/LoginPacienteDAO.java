@@ -1,5 +1,6 @@
 package model.dao;
 
+import model.vo.LoginAtendente;
 import model.vo.LoginPaciente;
 import model.vo.Paciente;
 import util.ConnectionManager;
@@ -7,6 +8,7 @@ import util.ConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class LoginPacienteDAO {
@@ -38,6 +40,27 @@ public class LoginPacienteDAO {
 
         } catch (Exception e) {
             System.err.println("Erro ao inserir LoginPaciente: " + e.getMessage());
+        }
+    }
+
+    public void atualizarLoginPaciente(LoginPaciente loginPaciente) {
+
+        String sql = "UPDATE TB_LOGIN_PACIENTE" + " SET SENHA = ?, LOGIN = ? WHERE ID_PACIENTE = ? ";
+
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, loginPaciente.getSenha());
+            ps.setString(2, loginPaciente.getLogin());
+            ps.setInt(3, loginPaciente.getPaciente().getId());
+            ps.execute();
+            System.out.println("Login do Paciente atualizado com sucesso");
+
+            ps.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
