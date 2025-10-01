@@ -24,4 +24,8 @@ public class AtendenteController {
     public void atualizar(Atendente atendente){
         atendenteDAO.atualizarAtendente(atendente);
     }
+
+    public void excluir(int id) {
+        atendenteDAO.excluirAtendente(id);
+    }
 }

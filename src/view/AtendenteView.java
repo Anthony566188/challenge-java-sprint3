@@ -58,6 +58,10 @@ public class AtendenteView {
         controller.atualizar(atendente);
     }
 
+    public void excluirAtendente(int id){
+        controller.excluir(id);
+    }
+
     // ---------------- MENU ----------------
 
     public void exibirMenuAtendente() {

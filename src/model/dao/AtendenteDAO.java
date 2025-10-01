@@ -86,4 +86,23 @@ public class AtendenteDAO {
             e.printStackTrace();
         }
     }
+
+    public void excluirAtendente(int id){
+        String sql = "DELETE FROM TB_ATENDENTE WHERE ID_ATENDENTE = ?";
+
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            System.out.println("Atendente excluído com sucesso!");
+
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            System.err.println("Erro ao excluir o Atendente!");
+            e.printStackTrace();
+        }
+    }
+
 }
