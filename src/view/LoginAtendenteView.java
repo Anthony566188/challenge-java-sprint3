@@ -20,12 +20,15 @@ public class LoginAtendenteView {
     public void inserirLoginAtendente(){
         List<Atendente> atendentes = atendenteController.listar();
 
-        Atendente atendenteSelecionado = atendentes.get(0);
+        Atendente atendenteSelecionado = atendentes.get(2);
 
-        controller.inserir(new LoginAtendente("login123", "senha123",  atendenteSelecionado));
+        controller.inserir(new LoginAtendente("loginPedro", "senhaPedro",  atendenteSelecionado));
     }
 
-    public void atualizarLoginAtendente(LoginAtendente loginAtendente){
-        controller.Atualizar(loginAtendente);
+    public void atualizarLoginAtendente(){
+        List<Atendente> atendentes = atendenteController.listar();
+
+        Atendente atendenteSelecionado = atendentes.get(0);
+        controller.Atualizar(new LoginAtendente("loginRomario", "senhaRomario",  atendenteSelecionado));
     }
 }

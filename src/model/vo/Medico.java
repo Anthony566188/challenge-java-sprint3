@@ -15,6 +15,10 @@ public class Medico extends Usuario {
         this.especialidade = especialidade;
     }
 
+    public Medico(int id, String nome) {
+        super(id, nome);
+    }
+
     // apenas o id
     public Medico(int id) {
         super(id);

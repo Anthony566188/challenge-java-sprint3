@@ -18,9 +18,14 @@ public class Main {
         TicketView ticketView = new TicketView();
         ConversaView conversaView = new ConversaView();
 
+//        pacienteView.listarPaciente();
+//        atendenteView.listarAtendentes();
+//        especialidadeView.listarEspecialidades();
+//        medicoView.listarMedicos();
 
 
-        
+
+
         loginManagerView.autenticarUsuario();
 
 

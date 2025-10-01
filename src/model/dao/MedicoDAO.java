@@ -71,4 +71,40 @@ public class MedicoDAO {
         return medicos;
     }
 
+    public void atualizarMedico(Medico medico) {
+
+        String sql = "UPDATE TB_MEDICO" + " SET NOME_MEDICO = ? "
+                + " WHERE ID_MEDICO = ? ";
+
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, medico.getNome());
+            ps.setInt(2, medico.getId());
+            ps.execute();
+            System.out.println("Médico atualizado com sucesso!");
+        } catch (SQLException e) {
+            System.err.println("Erro ao atualizar Médico!");
+            e.printStackTrace();
+        }
+    }
+
+    public void excluirMedico(int id){
+        String sql = "DELETE FROM TB_MEDICO WHERE ID_MEDICO = ?";
+
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            System.out.println("Médico excluído com sucesso!");
+
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            System.err.println("Erro ao excluir o Médico!");
+            e.printStackTrace();
+        }
+    }
+
 }

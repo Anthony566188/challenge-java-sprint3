@@ -20,9 +20,9 @@ public class MedicoView {
     public void inserirMedico(){
         List<Especialidade> especialidades = especialidadeController.listar();
 
-        Especialidade especialidadeSelecionada = especialidades.get(0);
+        Especialidade especialidadeSelecionada = especialidades.get(4);
 
-        controller.inserir(new Medico(especialidadeSelecionada, "Fernando"));
+        controller.inserir(new Medico(especialidadeSelecionada, "Fabrício"));
     }
 
     public void listarMedicos(){
@@ -34,4 +34,13 @@ public class MedicoView {
             System.out.println("Nome: " + medico.getNome());
         }
     }
+
+    public void atualizarMedico(Medico medico){
+        controller.atualizar(medico);
+    }
+
+    public void excluirMedico(int id){
+        controller.excluir(id);
+    }
+
 }

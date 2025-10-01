@@ -24,6 +24,10 @@ public class EspecialidadeView {
         }
     }
 
+    public void atualizarEspecialidade(Especialidade especialidade) {
+        controller.atualizar(especialidade);
+    }
+
     public void excluirEspecialidade(int id) {
         controller.excluir(id);
     }

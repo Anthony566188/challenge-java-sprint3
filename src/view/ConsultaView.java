@@ -24,12 +24,12 @@ public class ConsultaView {
 
     public void inserirConsulta() {
         List<Paciente> pacientes = pacienteController.listar();
-        Paciente pacienteSelecionado = pacientes.get(0);
+        Paciente pacienteSelecionado = pacientes.get(1);
 
         List<Medico> medicos = medicoController.listar();
-        Medico medicoSelecionado = medicos.get(0);
+        Medico medicoSelecionado = medicos.get(2);
 
-        controller.inserir(new Consulta(pacienteSelecionado, medicoSelecionado, LocalDateTime.of(2025, 9, 21, 15, 0), LocalDateTime.of(2025, 9, 21, 16, 0)));
+        controller.inserir(new Consulta(pacienteSelecionado, medicoSelecionado, LocalDateTime.of(2025, 10, 1, 15, 0), LocalDateTime.of(2025, 9, 21, 16, 0)));
     }
 
     public void listarConsultas() {

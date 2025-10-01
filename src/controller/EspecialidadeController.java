@@ -21,6 +21,10 @@ public class EspecialidadeController {
         return  especialidadeDAO.listarEspecialidades();
     }
 
+    public void atualizar(Especialidade especialidade) {
+        especialidadeDAO.atualizarEspecialidade(especialidade);
+    }
+
     public void excluir(int id) {
         especialidadeDAO.excluirEspecialidade(id);
     }

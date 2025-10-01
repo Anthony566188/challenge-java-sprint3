@@ -25,12 +25,16 @@ public class LoginPacienteView {
     public void inserirLoginPaciente(){
         List<Paciente> pacientes = pacienteController.listar();
 
-        Paciente pacienteSelecionado = pacientes.get(0);
+        Paciente pacienteSelecionado = pacientes.get(1);
 
-        controller.inserir(new LoginPaciente( "login123", "senha123", pacienteSelecionado));
+        controller.inserir(new LoginPaciente( "loginGuilherme", "senhaGuilherme", pacienteSelecionado));
     }
 
-    public void atualizarLoginPaciente(LoginPaciente loginPaciente){
-        controller.atualizar(loginPaciente);
+    public void atualizarLoginPaciente(){
+
+        List<Paciente> pacientes = pacienteController.listar();
+
+        Paciente pacienteSelecionado = pacientes.get(0);
+        controller.atualizar(new LoginPaciente("loginGustavo", "senhaGustavo", pacienteSelecionado));
     }
 }

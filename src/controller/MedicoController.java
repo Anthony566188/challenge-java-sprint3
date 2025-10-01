@@ -21,4 +21,12 @@ public class MedicoController {
         return medicoDAO.listarMedicos();
     }
 
+    public void atualizar(Medico medico){
+        medicoDAO.atualizarMedico(medico);
+    }
+
+    public void excluir(int id){
+        medicoDAO.excluirMedico(id);
+    }
+
 }
